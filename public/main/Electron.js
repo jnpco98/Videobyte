@@ -8,7 +8,7 @@ const { app } = electron;
 let mainWindow;
 
 function createWindow() {
-    mainWindow = new Window({ url: 'http://localhost:3000', config: { title: 'FFVideo' } });
+    mainWindow = new Window({ url: 'http://localhost:3000', config: { title: 'FFVideo', webPreferences: { backgroundThrottling: false } } });
     mainWindow.on('closed', () => mainWindow = null);
 };
 

@@ -4,7 +4,7 @@ const { BrowserWindow, Menu } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 
-const defaultConfig = { width: 800, height: 600, show: false };
+const defaultConfig = { width: 800, height: 600, minWidth: 800, minHeight: 600, show: false };
 
 const defaultMenu = [
     {

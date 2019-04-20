@@ -8,13 +8,6 @@ const Wrapper = styled.div`
   grid-column: 1/6;
   grid-row: 8/11;
   margin: 2rem;
-
-  .dropzone-active {
-    color:green;
-  }
-  .dropzone-reject {
-    color:red;
-  }
 `;
 
 const Dropzone = styled(_Dropzone)`
@@ -38,15 +31,23 @@ const FileDrop = () => {
     });
   }
 
+
   return (
     <Wrapper>
       <Dropzone
         onDrop={handleOnDrop}
         multiple={true}
-        accept={'video/*'}
-        activeClassName="dropzone-active"
-        rejectClassName="dropzone-reject" >
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        accept={'video/*'}>
+        {
+          ({ isDragActive, isDragAccept, isDragReject }) => {
+            return (
+              <div>
+                {/* // TODO: Return a different component for each. */}
+                <p>Drag 'n' drop some files here, or click to select files.</p>
+              </div>
+            );
+          }
+        }
       </Dropzone>
     </Wrapper>
   );

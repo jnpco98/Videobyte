@@ -8,6 +8,8 @@ import FileDrop from './components/FileDrop';
 import FileGrid from './components/FileGrid';
 import Execution from './components/Execution';
 
+const { ipcRenderer } = window.require('electron');
+
 const Wrapper = styled.div`
   margin: 5vh;
 `;
@@ -21,16 +23,36 @@ const InnerWrapper = styled.div`
 
 
 class App extends Component {
+  state = {
+    files: []
+  }
+
+  add = (files) => {
+    ipcRenderer.send('onFilesAdded', files);
+  }
+
+  remove = (files) => {
+    ipcRenderer.send('onFilesRemoved', files);
+  }
+
+  convert = (files) => {
+
+  }
+
+  preview = (file) => {
+
+  }
+
   render() {
     return (
       <Wrapper>
         <GlobalStyle />
         <InnerWrapper>
-          <FileList />
+          <FileList files={this.state.files} />
           <FilenameModifier />
-          <FileDrop />
-          <FileGrid />
-          <Execution />
+          <FileDrop add={this.add} />
+          <FileGrid files={this.state.files} />
+          <Execution convert={this.convert} />
         </InnerWrapper>
       </Wrapper>
     );

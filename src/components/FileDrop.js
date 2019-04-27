@@ -21,16 +21,13 @@ const Dropzone = styled(_Dropzone)`
   border-radius: 5px;
 `;
 
-const FileDrop = () => {
+const FileDrop = ({ add }) => {
   const handleOnDrop = (acceptedFiles, rejectedFiles) => {
-    acceptedFiles.forEach(file => {
-      console.log('accepted: ', file.name + '\n' + file.path + '\n' + file.preview + '\n' + file.size + '\n' + file.type)
+    acceptedFiles = acceptedFiles.map(file => {
+      return ({ name: file.name, path: file.path, preview: file.preview, size: file.size, type: file.type });
     });
-    rejectedFiles.forEach(file => {
-      console.log('rejected: ', file.name + '\n' + file.path + '\n' + file.preview + '\n' + file.size + '\n' + file.type)
-    });
+    add(acceptedFiles);
   }
-
 
   return (
     <Wrapper>

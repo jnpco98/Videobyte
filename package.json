@@ -21,11 +21,12 @@
     "wait-on": "^3.2.0"
   },
   "scripts": {
-    "start": "cross-env PORT=4680 react-scripts start",
+    "start": "cross-env BROWSER=none PORT=4680 react-scripts start",
+    "electron": "electron .",
+    "electron-start": "concurrently \"npm start\" \"wait-on http://localhost:4680 && electron .\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:4680 && electron .\""
+    "eject": "react-scripts eject"
   },
   "main": "public/main/Electron.js",
   "eslintConfig": {

@@ -32,7 +32,7 @@ const FilenameModifier = () => {
       <Label>Suffix:</Label> <Input />
 
       <TypeSelect>
-        {Object.keys(VideoFormat).map(format => <option>{format}</option>)}
+        {Object.keys(VideoFormat).map((format, idx) => <option key={idx}>{format}</option>)}
       </TypeSelect>
 
     </Wrapper>

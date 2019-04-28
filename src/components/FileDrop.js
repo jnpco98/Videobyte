@@ -22,9 +22,9 @@ const Dropzone = styled(_Dropzone)`
 `;
 
 const FileDrop = ({ addFiles }) => {
-  const handleOnDrop = (acceptedFiles, rejectedFiles) => {
+  const handleOnDrop = (acceptedFiles) => {
     acceptedFiles = acceptedFiles.map(file => {
-      return ({ name: file.name, path: file.path, preview: file.preview, size: file.size, type: file.type });
+      return ({ name: file.name, path: file.path, preview: file.preview });
     });
     addFiles(acceptedFiles);
   }

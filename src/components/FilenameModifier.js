@@ -18,10 +18,10 @@ const Label = styled.label`
 
 const Input = styled.input`
   margin-right: 0.8rem;
+  width: 20%;
 `;
 
 const TypeSelect = styled.select`
-  width: 4rem;
 `;
 
 const FilenameModifier = () => {

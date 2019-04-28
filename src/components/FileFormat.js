@@ -5,9 +5,9 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   background-color:chartreuse;
   grid-column: 6/11;
-  grid-row: 1/9;
+  grid-row: 6/9;
 `;
-const FileGrid = () => {
+const FileFormat = () => {
   return (
     <Wrapper>
 
@@ -15,4 +15,4 @@ const FileGrid = () => {
   );
 };
 
-export default FileGrid;
+export default FileFormat;

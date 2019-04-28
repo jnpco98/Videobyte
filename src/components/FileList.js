@@ -2,15 +2,30 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.ul`
   background-color: red;
   grid-column: 1/6;
   grid-row: 1/8;
 `;
-const FileList = () => {
+
+const FileInfo = styled.li`
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+`;
+
+const FileList = ({ files }) => {
   return (
     <Wrapper>
-
+      {
+        files.map(file => {
+          const { meta, name, path, preview } = file;
+          console.log(file);
+          return (
+            <FileInfo key={path}> {name}</FileInfo>
+          );
+        })
+      }
     </Wrapper>
   );
 };

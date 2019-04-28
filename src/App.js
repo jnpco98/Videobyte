@@ -30,7 +30,7 @@ class App extends Component {
     this.state = {
       files: [],
       filenameModifier: {},
-      selectedFilePreview: {},
+      selectedFile: {},
       selectedFormat: '',
       saveLocation: ''
     }
@@ -60,8 +60,8 @@ class App extends Component {
   }
 
   // Preview
-  setPreview = (selectedFilePreview) => {
-    this.setState({ selectedFilePreview: selectedFilePreview });
+  setSelectedFile = (selectedFile) => {
+    this.setState({ selectedFile: selectedFile });
   }
 
   // File format
@@ -76,7 +76,7 @@ class App extends Component {
 
   // Execution
   convertFiles = (files) => {
-
+    console.log(files)
   }
 
   render() {
@@ -84,12 +84,12 @@ class App extends Component {
       <Wrapper>
         <GlobalStyle />
         <InnerWrapper>
-          <FileList files={this.state.files} removeFiles={this.removeFiles} setPreview={this.setPreview} />
+          <FileList files={this.state.files} removeFiles={this.removeFiles} setSelectedFile={this.setSelectedFile} />
           <FilenameModifier setFileNameModifier={this.setFileNameModifier} />
           <FileDrop addFiles={this.addFiles} />
-          <Preview selectedFilePreview={this.state.selectedFilePreview} />
+          <Preview selectedFile={this.state.selectedFile} />
           <FileFormat selectFormat={this.selectFormat} />
-          <Execution setSaveLocatione={this.setSaveLocation} convert={this.convertFiles} />
+          <Execution setSaveLocation={this.setSaveLocation} convert={() => this.convertFiles(this.state.files)} />
         </InnerWrapper>
       </Wrapper>
     );

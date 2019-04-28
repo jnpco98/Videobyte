@@ -21,15 +21,14 @@ const OutputFolder = styled.input`
 `;
 
 const Convert = styled.a`
-  margin-right: 0.8rem;
 `;
 
-const Execution = () => {
+const Execution = ({ setSaveLocation, convert }) => {
   return (
     <Wrapper>
       <Label> Folder: </Label>
       <OutputFolder />
-      <Convert />
+      <Convert onClick={() => convert()}>Convert</Convert>
     </Wrapper>
   );
 };

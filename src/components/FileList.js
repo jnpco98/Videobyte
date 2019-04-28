@@ -25,14 +25,14 @@ const Filename = styled.p``;
 
 const FileDuration = styled.p``;
 
-const FileList = ({ files, removeFiles, setPreview }) => {
+const FileList = ({ files, removeFiles, setSelectedFile }) => {
   return (
     <Wrapper>
       {
         files.map(file => {
           const { meta, name, path } = file;
           return (
-            <Item key={path} onClick={() => setPreview(file)}>
+            <Item key={path} onClick={() => setSelectedFile(file)}>
               <RemoveFile onClick={() => removeFiles([file])}>Remove</RemoveFile>
               <FileInfo>
                 <Filename>{name}</Filename>

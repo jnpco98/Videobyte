@@ -7,12 +7,13 @@ const Wrapper = styled.div`
   grid-row: 1/6;
 `;
 
-const Preview = () => {
-    return (
-        <Wrapper>
-
-        </Wrapper>
-    );
+const Preview = ({ selectedFilePreview }) => {
+  return (
+    <Wrapper>
+      {selectedFilePreview.name}
+      {selectedFilePreview.preview}
+    </Wrapper>
+  );
 };
 
 export default Preview;

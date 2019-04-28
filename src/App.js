@@ -60,8 +60,8 @@ class App extends Component {
   }
 
   // Preview
-  setPreview = (file) => {
-
+  setPreview = (selectedFilePreview) => {
+    this.setState({ selectedFilePreview: selectedFilePreview });
   }
 
   // File format

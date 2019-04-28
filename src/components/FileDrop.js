@@ -21,12 +21,12 @@ const Dropzone = styled(_Dropzone)`
   border-radius: 5px;
 `;
 
-const FileDrop = ({ add }) => {
+const FileDrop = ({ addFiles }) => {
   const handleOnDrop = (acceptedFiles, rejectedFiles) => {
     acceptedFiles = acceptedFiles.map(file => {
       return ({ name: file.name, path: file.path, preview: file.preview, size: file.size, type: file.type });
     });
-    add(acceptedFiles);
+    addFiles(acceptedFiles);
   }
 
   return (

@@ -32,13 +32,12 @@ ipcMain.on('onFilesAdded', (event, files) => {
     const promises = files.map(file => {
         return new Promise((resolve, reject) => {
             ffmpeg.ffprobe(file.path, (err, meta) => {
-                resolve(meta);
+                resolve({ ...file, meta });
             });
         });
-
     });
     Promise.all(promises)
-        .then((res) => console.log(res));
+        .then(res => mainWindow.webContents.send('onFetchMetaDataComplete', res));
 });
 
 ipcMain.on('onFilesRemoved', (event, files) => {

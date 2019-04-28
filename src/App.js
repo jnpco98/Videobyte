@@ -42,7 +42,10 @@ class App extends Component {
 
   // Dropzone
   addFiles = (files) => {
-    ipcRenderer.send('onFilesAdded', files);
+    const paths = this.state.files.map(file => file.path);
+    const filtered = files.filter(file => !paths.includes(file.path));
+
+    ipcRenderer.send('onFilesAdded', filtered);
   }
 
   // File list

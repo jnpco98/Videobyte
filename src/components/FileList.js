@@ -8,20 +8,37 @@ const Wrapper = styled.ul`
   grid-row: 1/8;
 `;
 
-const FileInfo = styled.li`
+const Item = styled.li`
   display:flex;
   justify-content: space-between;
   align-items:center;
+  background: green;
 `;
 
-const FileList = ({ files, removeFiles }) => {
+const RemoveFile = styled.i`
+  background:yellow;
+`;
+
+const FileInfo = styled.div``;
+
+const Filename = styled.p``;
+
+const FileDuration = styled.p``;
+
+const FileList = ({ files, removeFiles, setPreview }) => {
   return (
     <Wrapper>
       {
         files.map(file => {
-          const { meta, name, path, preview } = file;
+          const { meta, name, path } = file;
           return (
-            <FileInfo key={path} onClick={() => removeFiles([file])}> {name}</FileInfo>
+            <Item key={path} onClick={() => setPreview(file)}>
+              <RemoveFile onClick={() => removeFiles([file])}>Remove</RemoveFile>
+              <FileInfo>
+                <Filename>{name}</Filename>
+                <FileDuration>{meta.format.duration}</FileDuration>
+              </FileInfo>
+            </Item>
           );
         })
       }

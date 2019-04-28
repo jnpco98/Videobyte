@@ -14,15 +14,14 @@ const FileInfo = styled.li`
   align-items:center;
 `;
 
-const FileList = ({ files }) => {
+const FileList = ({ files, removeFiles }) => {
   return (
     <Wrapper>
       {
         files.map(file => {
           const { meta, name, path, preview } = file;
-          console.log(file);
           return (
-            <FileInfo key={path}> {name}</FileInfo>
+            <FileInfo key={path} onClick={() => removeFiles([file])}> {name}</FileInfo>
           );
         })
       }

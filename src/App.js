@@ -50,7 +50,8 @@ class App extends Component {
 
   // File list
   removeFiles = (files) => {
-    ipcRenderer.send('onFilesRemoved', files);
+    const toRemove = files.map(file => file.path);
+    this.setState({ files: this.state.files.filter(file => !toRemove.includes(file.path)) });
   }
 
   // File name modifier
@@ -59,7 +60,7 @@ class App extends Component {
   }
 
   // Preview
-  previewFile = (file) => {
+  setPreview = (file) => {
 
   }
 
@@ -83,7 +84,7 @@ class App extends Component {
       <Wrapper>
         <GlobalStyle />
         <InnerWrapper>
-          <FileList files={this.state.files} />
+          <FileList files={this.state.files} removeFiles={this.removeFiles} setPreview={this.setPreview} />
           <FilenameModifier setFileNameModifier={this.setFileNameModifier} />
           <FileDrop addFiles={this.addFiles} />
           <Preview selectedFilePreview={this.state.selectedFilePreview} />

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.ul`
   background-color: red;
+  min-width: 50vh;
+  min-height: 50vh;
   grid-column: 1/6;
   grid-row: 1/8;
 `;
@@ -19,7 +21,8 @@ const RemoveFile = styled.i`
   background:yellow;
 `;
 
-const FileInfo = styled.div``;
+const FileInfo = styled.div`
+`;
 
 const Filename = styled.p``;
 

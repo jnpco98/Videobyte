@@ -3,15 +3,20 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   background-color:darkgray;
+  min-width: 40vh;
+  min-height: 30vh;
   grid-column: 6/11;
   grid-row: 1/6;
+`;
+
+const PreviewFile = styled.video`
+
 `;
 
 const Preview = ({ selectedFile }) => {
   return (
     <Wrapper>
-      {selectedFile.name}
-      {selectedFile.preview}
+      {/* <PreviewFile width='480px' height='360px' controls={true}><source src={selectedFile.path} type={selectedFile.type} /></PreviewFile> */}
     </Wrapper>
   );
 };

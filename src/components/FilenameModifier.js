@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   background-color: coral;
+  min-width: 50vh;
+  min-height: 4rem;
   grid-column: 1/6;
   grid-row: 7/8;
   display:flex;
@@ -27,9 +29,9 @@ const TypeSelect = styled.select`
 const FilenameModifier = () => {
   return (
     <Wrapper>
-      {/* // TODO Input to be validated on submit */}
-      <Label>Prefix:</Label> <Input id='inputPrefix'/>
-      <Label>Suffix:</Label> <Input id='inputSuffix'/>
+      {/* TODO Input to be validated on submit */}
+      <Label>Prefix:</Label> <Input id='inputPrefix' />
+      <Label>Suffix:</Label> <Input id='inputSuffix' />
       <TypeSelect>
         {Object.keys(VideoFormat).map((format, idx) => <option key={idx}>{format}</option>)}
       </TypeSelect>

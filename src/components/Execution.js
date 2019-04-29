@@ -4,9 +4,12 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   background-color:tomato;
+  min-width: 40vh;
+  min-height: 4rem;
   grid-column: 6/11;
   grid-row: 9/11;
   display:flex;
+  justify-content: space-between;
   align-items:center;
   padding: 0 1rem;
 `;

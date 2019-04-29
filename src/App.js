@@ -8,6 +8,7 @@ import FileDrop from './components/FileDrop';
 import FileFormat from './components/FileFormat';
 import Execution from './components/Execution';
 import Preview from './components/Preview';
+import VideoFormat from './VideoFormat';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -22,6 +23,7 @@ const InnerWrapper = styled.div`
   grid-template-rows: repeat(10, auto);
 `;
 
+const INITIAL_FORMAT = 'MP4';
 
 class App extends Component {
   constructor() {
@@ -30,7 +32,7 @@ class App extends Component {
     this.state = {
       files: [],
       selectedFile: {},
-      selectedFormat: '',
+      selectedFormat: VideoFormat[INITIAL_FORMAT],
       saveToCurrentDirectory: true,
     }
   }
@@ -73,6 +75,7 @@ class App extends Component {
     if (files.length > 0)
       ipcRenderer.send('onFilesConvertStart', files,
         { saveLocation: document.getElementById('inputPath').value, saveToCurrentDirectory: this.state.saveToCurrentDirectory },
+        { outputFormat: this.state.selectedFormat },
         { prefix: document.getElementById('inputPrefix').value, suffix: document.getElementById('inputSuffix').value });
   }
 
@@ -85,7 +88,7 @@ class App extends Component {
           <FilenameModifier />
           <FileDrop addFiles={this.addFiles} />
           <Preview selectedFile={this.state.selectedFile} /> {/**convert video before passing */}
-          <FileFormat selectFormat={this.selectFormat} />
+          <FileFormat selectFormat={this.selectFormat} formatIdx={Object.keys(VideoFormat).indexOf(INITIAL_FORMAT)} />
           <Execution convert={() => this.convertFiles(this.state.files)} saveToCurrentDirectory={this.state.saveToCurrentDirectory} setSaveToCurrentDirectory={this.setSaveToCurrentDirectory} />
         </InnerWrapper>
       </Wrapper>

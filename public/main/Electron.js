@@ -44,21 +44,22 @@ ipcMain.on('onFilesAdded', (event, files) => {
 
 // Check if file exists in directory - overwrite.
 ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory }, { outputFormat }, { prefix, suffix }) => {
-    const file = files[0];
-    const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
-    const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
+    files.forEach(file => {
+        const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
+        const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
 
-    if (!fs.existsSync(outputDirectory)) {
-        console.log('Invalid Location: ', outputDirectory);
-    }
-    else {
-        const outputPath = path.join(outputDirectory, outputFilename)
-        console.log(`${file.name} -> ${outputPath} complete.`)
-        // ffmpeg(file.path)
-        //     .output(outputPath)
-        //     .on('end', () => console.log(`${file.name} -> ${outputPath} complete.`))
-        //     .run();
-    }
+        if (!fs.existsSync(outputDirectory)) {
+            console.log('Invalid Location: ', outputDirectory);
+        }
+        else {
+            const outputPath = path.join(outputDirectory, outputFilename);
+            mainWindow.webContents.send('onFileConvertEnd', file, ouputPath);
+            // ffmpeg(file.path)
+            //     .output(outputPath)
+            //     .on('end', () => mainWindow.webContents.send('onFileConvertEnd', file, ouputPath))
+            //     .run();
+        }
+    });
 });
 
 ipcMain.on('onFilePreview', (event, file) => {

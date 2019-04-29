@@ -72,7 +72,7 @@ class App extends Component {
   convertFiles = (files) => {
     if (files.length > 0)
       ipcRenderer.send('onFilesConvertStart', files,
-        { saveLocation: this.state.saveLocation, saveToCurrentDirectory: this.state.saveToCurrentDirectory },
+        { saveLocation: document.getElementById('inputPath').value, saveToCurrentDirectory: this.state.saveToCurrentDirectory },
         { prefix: document.getElementById('inputPrefix').value, suffix: document.getElementById('inputSuffix').value });
   }
 

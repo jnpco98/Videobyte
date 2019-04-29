@@ -5,6 +5,7 @@ const Window = require('./Window');
 const { app, ipcMain } = electron;
 const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
+const fs = require('fs');
 
 let mainWindow;
 
@@ -12,10 +13,6 @@ function createWindow() {
     mainWindow = new Window({ url: 'http://localhost:4680', config: { title: 'FFVideo', webPreferences: { backgroundThrottling: false } } });
     mainWindow.on('closed', () => mainWindow = null);
 };
-
-function validatePath(path) {
-    return false;
-}
 
 app.on('ready', () => {
     createWindow();
@@ -45,12 +42,10 @@ ipcMain.on('onFilesAdded', (event, files) => {
         .then(res => mainWindow.webContents.send('onFetchMetaDataComplete', res));
 });
 
-// ffmpeg(file.path)
-//     .output(path.basename(file.path) + '.mov')
 ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory }, { prefix, suffix }) => {
     const file = files[0];
     const outputDir = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
-    if (outputDir && !validatePath(outputDir)) {
+    if (!fs.existsSync(outputDir)) {
         console.log('Invalid Location: ', outputDir);
     }
     else {

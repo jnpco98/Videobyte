@@ -6,11 +6,23 @@ const { app, ipcMain } = electron;
 const ffmpeg = require('fluent-ffmpeg');
 
 let mainWindow;
+let prevSize;
 
 function createWindow() {
     mainWindow = new Window({ url: 'http://localhost:4680', config: { title: 'FFVideo', webPreferences: { backgroundThrottling: false } } });
+    setInterval(() => { if (mainWindow) prevSize = mainWindow.getSize(); }, 10);
+
     mainWindow.on('closed', () => mainWindow = null);
+    mainWindow.on('resize', () => handleResize());
 };
+
+function handleResize() {
+    if (mainWindow !== null) {
+        let size = mainWindow.getSize();
+        const ratio = 600 / 800; // Height, Width
+        prevSize[0] != size[0] ? mainWindow.setSize(size[0], parseInt((size[0] * ratio).toString())) : mainWindow.setSize(parseInt((size[1] / ratio).toString()), size[1]);
+    }
+}
 
 app.on('ready', () => {
     createWindow();
@@ -40,11 +52,7 @@ ipcMain.on('onFilesAdded', (event, files) => {
         .then(res => mainWindow.webContents.send('onFetchMetaDataComplete', res));
 });
 
-ipcMain.on('onFilesRemoved', (event, files) => {
-
-});
-
-ipcMain.on('onFilesConverted', (event, files) => {
+ipcMain.on('onFilesConvertStart', (event, files) => {
 
 });
 

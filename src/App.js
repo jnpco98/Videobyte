@@ -88,7 +88,7 @@ class App extends Component {
           <FilenameModifier />
           <FileDrop addFiles={this.addFiles} />
           <Preview selectedFile={this.state.selectedFile} /> {/**convert video before passing */}
-          <FileFormat selectFormat={this.selectFormat} formatIdx={Object.keys(VideoFormat).indexOf(INITIAL_FORMAT)} />
+          <FileFormat selectFormat={this.selectFormat} formatIdx={Object.keys(VideoFormat).indexOf(this.state.selectedFormat.name)} />
           <Execution convert={() => this.convertFiles(this.state.files)} saveToCurrentDirectory={this.state.saveToCurrentDirectory} setSaveToCurrentDirectory={this.setSaveToCurrentDirectory} />
         </InnerWrapper>
       </Wrapper>

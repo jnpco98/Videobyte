@@ -42,21 +42,22 @@ ipcMain.on('onFilesAdded', (event, files) => {
         .then(res => mainWindow.webContents.send('onFetchMetaDataComplete', res));
 });
 
+// Check if file exists in directory - overwrite.
 ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory }, { outputFormat }, { prefix, suffix }) => {
     const file = files[0];
     const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
-    const outputFilename = prefix + path.basename(file.path).split('.')[0] + suffix;
+    const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
 
     if (!fs.existsSync(outputDirectory)) {
         console.log('Invalid Location: ', outputDirectory);
     }
     else {
-        const outputPath = path.join(outputDirectory, outputFilename + outputFormat.extension)
-        console.log('Output Path: ', outputPath);
-        ffmpeg(file.path)
-            .output(outputPath)
-            .on('end', () => console.log(`${file.name} -> ${outputPath} complete.`))
-            .run();
+        const outputPath = path.join(outputDirectory, outputFilename)
+        console.log(`${file.name} -> ${outputPath} complete.`)
+        // ffmpeg(file.path)
+        //     .output(outputPath)
+        //     .on('end', () => console.log(`${file.name} -> ${outputPath} complete.`))
+        //     .run();
     }
 });
 

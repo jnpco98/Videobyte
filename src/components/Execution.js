@@ -42,41 +42,26 @@ const Convert = styled.a`
   background: green;
 `;
 
-class Execution extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      saveToCurrentDirectory: true,
-    };
-  }
+const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory }) => {
+  return (
+    <Wrapper>
+      <SaveDirectory>
+        <div>
+          <PathLabel> Folder: </PathLabel>
+          <PathName disabled={saveToCurrentDirectory} id='inputPath' />
+        </div>
+        <div>
+          <SaveToDirectoryCheck checked={saveToCurrentDirectory} onChange={() => setSaveToCurrentDirectory(!saveToCurrentDirectory)} />
+          <SaveToDirectoryLabel> Save to current directory </SaveToDirectoryLabel>
+        </div>
+      </SaveDirectory>
 
-  setSaveToCurrentDirectory = (enabled) => {
-    this.setState({ saveToCurrentDirectory: enabled });
-  }
-
-  render() {
-    const { setSaveLocation, convert } = this.props;
-    return (
-      <Wrapper>
-        <SaveDirectory>
-          <div>
-            <PathLabel> Folder: </PathLabel>
-            <PathName disabled={this.state.saveToCurrentDirectory} />
-          </div>
-          <div>
-            <SaveToDirectoryCheck checked={this.state.saveToCurrentDirectory} onChange={() => this.setSaveToCurrentDirectory(!this.state.saveToCurrentDirectory)} />
-            <SaveToDirectoryLabel> Save to current directory </SaveToDirectoryLabel>
-          </div>
-        </SaveDirectory>
-
-        <Operation>
-          <Cancel>Cancel</Cancel>
-          <Convert onClick={() => convert()}>Convert</Convert>
-        </Operation>
-      </Wrapper>
-    );
-  }
-
+      <Operation>
+        <Cancel>Cancel</Cancel>
+        <Convert onClick={() => convert()}>Convert</Convert>
+      </Operation>
+    </Wrapper>
+  );
 };
 
 export default Execution;

@@ -28,9 +28,8 @@ const FilenameModifier = () => {
   return (
     <Wrapper>
       {/* // TODO Input to be validated on submit */}
-      <Label>Prefix:</Label> <Input />
-      <Label>Suffix:</Label> <Input />
-
+      <Label>Prefix:</Label> <Input id='inputPrefix'/>
+      <Label>Suffix:</Label> <Input id='inputSuffix'/>
       <TypeSelect>
         {Object.keys(VideoFormat).map((format, idx) => <option key={idx}>{format}</option>)}
       </TypeSelect>

@@ -29,10 +29,9 @@ class App extends Component {
 
     this.state = {
       files: [],
-      filenameModifier: {},
       selectedFile: {},
       selectedFormat: '',
-      saveLocation: ''
+      saveToCurrentDirectory: true,
     }
   }
 
@@ -54,11 +53,6 @@ class App extends Component {
     this.setState({ files: this.state.files.filter(file => !toRemove.includes(file.path)) });
   }
 
-  // File name modifier
-  setFileNameModifier = (modifier) => {
-    this.setState({ modifier: modifier });
-  }
-
   // Preview
   setSelectedFile = (selectedFile) => {
     this.setState({ selectedFile: selectedFile });
@@ -70,13 +64,16 @@ class App extends Component {
   }
 
   // Execution
-  setSaveLocation = (saveLocation) => {
-    this.setState({ saveLocation: saveLocation });
+  setSaveToCurrentDirectory = (enabled) => {
+    this.setState({ saveToCurrentDirectory: enabled });
   }
 
   // Execution
   convertFiles = (files) => {
-    console.log(files)
+    console.log('Save location if not save to current directory: ', document.getElementById('inputPath').value);
+    console.log('Save to current directory: ', this.state.saveToCurrentDirectory, ' Files: ', files);
+    console.log('Filename modifier: ', 'prefix - ', document.getElementById('inputPrefix').value, 'suffix - ', document.getElementById('inputSuffix').value)
+    //ipcRenderer.send('onFilesConvertStart', files, { saveLocation: this.state.saveLocation, saveToCurrentDirectory: this.state.saveToCurrentDirectory });
   }
 
   render() {
@@ -85,11 +82,11 @@ class App extends Component {
         <GlobalStyle />
         <InnerWrapper>
           <FileList files={this.state.files} removeFiles={this.removeFiles} setSelectedFile={this.setSelectedFile} />
-          <FilenameModifier setFileNameModifier={this.setFileNameModifier} />
+          <FilenameModifier />
           <FileDrop addFiles={this.addFiles} />
-          <Preview selectedFile={this.state.selectedFile} />
+          <Preview selectedFile={this.state.selectedFile} /> {/**convert video before passing */}
           <FileFormat selectFormat={this.selectFormat} />
-          <Execution setSaveLocation={this.setSaveLocation} convert={() => this.convertFiles(this.state.files)} />
+          <Execution convert={() => this.convertFiles(this.state.files)} saveToCurrentDirectory={this.state.saveToCurrentDirectory} setSaveToCurrentDirectory={this.setSaveToCurrentDirectory} />
         </InnerWrapper>
       </Wrapper>
     );

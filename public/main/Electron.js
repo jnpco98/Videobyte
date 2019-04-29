@@ -42,14 +42,21 @@ ipcMain.on('onFilesAdded', (event, files) => {
         .then(res => mainWindow.webContents.send('onFetchMetaDataComplete', res));
 });
 
-ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory }, { prefix, suffix }) => {
+ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory }, { outputFormat }, { prefix, suffix }) => {
     const file = files[0];
-    const outputDir = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
-    if (!fs.existsSync(outputDir)) {
-        console.log('Invalid Location: ', outputDir);
+    const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
+    const outputFilename = prefix + path.basename(file.path).split('.')[0] + suffix;
+
+    if (!fs.existsSync(outputDirectory)) {
+        console.log('Invalid Location: ', outputDirectory);
     }
     else {
-        console.log('outputDirectory: ', outputDir, ' || outputFilename: ', prefix + path.basename(file.path).split('.')[0] + suffix + '.mov');
+        const outputPath = path.join(outputDirectory, outputFilename + outputFormat.extension)
+        console.log('Output Path: ', outputPath);
+        ffmpeg(file.path)
+            .output(outputPath)
+            .on('end', () => console.log(`${file.name} -> ${outputPath} complete.`))
+            .run();
     }
 });
 

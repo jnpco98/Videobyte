@@ -44,7 +44,7 @@ ipcMain.on('onFilesAdded', (event, files) => {
 
 // Check if file exists in directory - overwrite.
 ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory }, { outputFormat }, { prefix, suffix }) => {
-    files.forEach(file => {
+    files.forEach((file, index) => {
         const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
         const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
 
@@ -53,11 +53,11 @@ ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDi
         }
         else {
             const outputPath = path.join(outputDirectory, outputFilename);
-            mainWindow.webContents.send('onFileConvertEnd', file, ouputPath);
-            // ffmpeg(file.path)
-            //     .output(outputPath)
-            //     .on('end', () => mainWindow.webContents.send('onFileConvertEnd', file, ouputPath))
-            //     .run();
+            ffmpeg(file.path)
+                .output(outputPath)
+                .on('progress', ({ percent }) => mainWindow.webContents.send('onFileConvertProgress', { file, percent, index }))
+                .on('end', () => mainWindow.webContents.send('onFileConvertEnd', { outputPath, index }))
+                .run();
         }
     });
 });

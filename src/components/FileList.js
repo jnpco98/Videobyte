@@ -28,6 +28,8 @@ const Filename = styled.p``;
 
 const FileDuration = styled.p``;
 
+const Progress = styled.p``;
+
 const FileList = ({ files, removeFiles, setSelectedFile }) => {
   return (
     <Wrapper>
@@ -41,6 +43,7 @@ const FileList = ({ files, removeFiles, setSelectedFile }) => {
                 <Filename>{name}</Filename>
                 <FileDuration>{meta.format.duration}</FileDuration>
               </FileInfo>
+              <Progress>{(file.progress ? file.progress : 0) + '%'}</Progress>
             </Item>
           );
         })

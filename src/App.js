@@ -70,10 +70,10 @@ class App extends Component {
 
   // Execution
   convertFiles = (files) => {
-    console.log('Save location if not save to current directory: ', document.getElementById('inputPath').value);
-    console.log('Save to current directory: ', this.state.saveToCurrentDirectory, ' Files: ', files);
-    console.log('Filename modifier: ', 'prefix - ', document.getElementById('inputPrefix').value, 'suffix - ', document.getElementById('inputSuffix').value)
-    //ipcRenderer.send('onFilesConvertStart', files, { saveLocation: this.state.saveLocation, saveToCurrentDirectory: this.state.saveToCurrentDirectory });
+    if (files.length > 0)
+      ipcRenderer.send('onFilesConvertStart', files,
+        { saveLocation: this.state.saveLocation, saveToCurrentDirectory: this.state.saveToCurrentDirectory },
+        { prefix: document.getElementById('inputPrefix').value, suffix: document.getElementById('inputSuffix').value });
   }
 
   render() {

@@ -24,7 +24,7 @@ const Dropzone = styled(_Dropzone)`
 const FileDrop = ({ addFiles }) => {
   const handleOnDrop = (acceptedFiles) => {
     acceptedFiles = acceptedFiles.map(file => {
-      return ({ name: file.name, path: file.path, preview: file.preview });
+      return ({ name: file.name, path: file.path, preview: file.preview, type: file.type });
     });
     addFiles(acceptedFiles);
   }

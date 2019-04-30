@@ -96,8 +96,9 @@ class App extends Component {
   // Execution
   convertFiles = (files) => {
     const { selectedFormat, saveToCurrentDirectory } = this.state;
-    if (files.length > 0) {
-      ipcRenderer.send('onFilesConvertStart', files,
+    const filesToConvert = files.filter(file => file.complete === false);
+    if (filesToConvert.length > 0) {
+      ipcRenderer.send('onFilesConvertStart', filesToConvert,
         {
           prefix: document.getElementById('inputPrefix').value,
           suffix: document.getElementById('inputSuffix').value,

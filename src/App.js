@@ -73,6 +73,11 @@ class App extends Component {
     this.setState({ files: this.state.files.filter(file => !ids.includes(file.id)) });
   }
 
+  // File list
+  openDirectory = (outputPath) => {
+    ipcRenderer.send('onDirectoryOpened', outputPath);
+  }
+
   // Preview
   setSelectedFile = (selectedFile) => {
     this.setState({ selectedFile: selectedFile });
@@ -109,7 +114,7 @@ class App extends Component {
       <Wrapper>
         <GlobalStyle />
         <InnerWrapper>
-          <FileList files={files} removeFiles={this.removeFiles} setSelectedFile={this.setSelectedFile} />
+          <FileList files={files} removeFiles={this.removeFiles} setSelectedFile={this.setSelectedFile} openDirectory={this.openDirectory} />
           <FilenameModifier />
           <FileDrop addFiles={this.addFiles} />
           <Preview selectedFile={selectedFile} />

@@ -36,7 +36,7 @@ const Progress = styled.p`
 const Complete = styled.div`
 `;
 
-const FileList = ({ files, removeFiles, setSelectedFile }) => {
+const FileList = ({ files, removeFiles, setSelectedFile, openDirectory }) => {
   return (
     <Wrapper>
       {
@@ -51,7 +51,7 @@ const FileList = ({ files, removeFiles, setSelectedFile }) => {
                 <FileDuration>{meta.format.duration}</FileDuration>
               </FileInfo>
 
-              {complete ? <Complete>Complete</Complete> : <Progress>{progress + '%'}</Progress>}
+              {complete ? <Complete onClick={() => openDirectory(file.path)}>Complete</Complete> : <Progress>{progress + '%'}</Progress>}
             </Item>
           );
         })

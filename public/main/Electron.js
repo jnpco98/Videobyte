@@ -6,7 +6,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const fs = require('fs');
 
-const { app, ipcMain } = electron;
+const { app, ipcMain, shell } = electron;
 let mainWindow;
 
 function createWindow() {
@@ -42,7 +42,6 @@ ipcMain.on('onFilesAdded', (event, files) => {
     });
 });
 
-// TODO Check if file exists in directory - overwrite.
 ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat, saveLocation, saveToCurrentDirectory }) => {
     files.forEach(file => {
         const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
@@ -52,7 +51,10 @@ ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat,
             console.log('Invalid Location: ', outputDirectory);
         }
         else {
-            const outputPath = path.join(outputDirectory, outputFilename);
+            const outputPath = fs.existsSync(path.join(outputDirectory, outputFilename)) ?
+                path.join(outputDirectory, 'converted_' + outputFilename) :
+                path.join(outputDirectory, outputFilename);
+
             ffmpeg(file.path)
                 .output(outputPath)
                 .on('progress', ({ percent }) => mainWindow.webContents.send('onFileConvertProgress', { id: file.id, percent }))
@@ -60,6 +62,10 @@ ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat,
                 .run();
         }
     });
+});
+
+ipcMain.on('onDirectoryOpened', (event, outputPath) => {
+    shell.showItemInFolder(outputPath);
 });
 
 ipcMain.on('onFilePreview', (event, file) => {

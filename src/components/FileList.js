@@ -33,22 +33,25 @@ const FileDuration = styled.p`
 const Progress = styled.p`
 `;
 
+const Complete = styled.div`
+`;
+
 const FileList = ({ files, removeFiles, setSelectedFile }) => {
   return (
     <Wrapper>
       {
         files.map(file => {
-          const { meta, name, path } = file;
+          const { id, name, meta, progress, complete } = file;
           return (
-            <Item key={path} onClick={() => setSelectedFile(file)}>
-              <RemoveFile onClick={() => removeFiles([file.id])}>Remove</RemoveFile>
+            <Item key={id} onClick={() => setSelectedFile(file)}>
+              <RemoveFile onClick={() => removeFiles([id])}>Remove</RemoveFile>
 
               <FileInfo>
                 <Filename>{name}</Filename>
                 <FileDuration>{meta.format.duration}</FileDuration>
               </FileInfo>
 
-              <Progress>{file.progress + '%'}</Progress>
+              {complete ? <Complete>Complete</Complete> : <Progress>{progress + '%'}</Progress>}
             </Item>
           );
         })

@@ -56,13 +56,13 @@ class App extends Component {
 
   // Dropzone
   addFiles = (files) => {
-    const idArr = this.state.files.map(file => file.id);
-    ipcRenderer.send('onFilesAdded', files.filter(file => !idArr.includes(file.id)));
+    const ids = this.state.files.map(file => file.id);
+    ipcRenderer.send('onFilesAdded', files.filter(file => !ids.includes(file.id)));
   }
 
   // File list
-  removeFiles = (idArr) => {
-    this.setState({ files: this.state.files.filter(file => !idArr.includes(file.id)) });
+  removeFiles = (ids) => {
+    this.setState({ files: this.state.files.filter(file => !ids.includes(file.id)) });
   }
 
   // Preview
@@ -82,14 +82,15 @@ class App extends Component {
 
   // Execution
   convertFiles = (files) => {
+    const { selectedFormat, saveToCurrentDirectory } = this.state;
     if (files.length > 0) {
       ipcRenderer.send('onFilesConvertStart', files,
         {
-          saveLocation: document.getElementById('inputPath').value,
-          saveToCurrentDirectory: this.state.saveToCurrentDirectory,
-          outputFormat: this.state.selectedFormat,
           prefix: document.getElementById('inputPrefix').value,
-          suffix: document.getElementById('inputSuffix').value
+          suffix: document.getElementById('inputSuffix').value,
+          outputFormat: selectedFormat,
+          saveLocation: document.getElementById('inputPath').value,
+          saveToCurrentDirectory: saveToCurrentDirectory
         });
     }
   }

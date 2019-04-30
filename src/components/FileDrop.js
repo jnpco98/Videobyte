@@ -24,18 +24,14 @@ const Dropzone = styled(_Dropzone)`
 
 const FileDrop = ({ addFiles }) => {
   const handleOnDrop = (acceptedFiles) => {
-    acceptedFiles = acceptedFiles.map(file => {
-      return ({ id: file.path, name: file.name, path: file.path, meta: {}, type: file.type, progress: 0, complete: false });
-    });
-    addFiles(acceptedFiles);
+    addFiles(acceptedFiles.map(file =>
+      ({ id: file.path, name: file.name, path: file.path, meta: {}, type: file.type, progress: 0, complete: false })
+    ));
   }
 
   return (
     <Wrapper>
-      <Dropzone
-        onDrop={handleOnDrop}
-        multiple={true}
-        accept={'video/*'}>
+      <Dropzone onDrop={handleOnDrop} multiple={true} accept={'video/*'}>
         {
           ({ isDragActive, isDragAccept, isDragReject }) => {
             return (

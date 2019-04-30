@@ -25,10 +25,11 @@ const Dropzone = styled(_Dropzone)`
 const FileDrop = ({ addFiles }) => {
   const handleOnDrop = (acceptedFiles) => {
     addFiles(acceptedFiles.map(file =>
-      ({ id: file.path, name: file.name, path: file.path, meta: {}, type: file.type, progress: 0, complete: false })
+      ({ id: file.path, name: file.name, path: file.path, meta: {}, type: file.type, progress: 0, complete: false, outputPath: '' })
     ));
   }
 
+  // TODO Accept other video formats
   return (
     <Wrapper>
       <Dropzone onDrop={handleOnDrop} multiple={true} accept={'video/*'}>

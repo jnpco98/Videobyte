@@ -38,20 +38,28 @@ class App extends Component {
   }
 
   componentDidMount() {
-    ipcRenderer.on('onFetchMetaDataComplete', (event, files) => this.setState({ files: [...this.state.files, ...files] }));
+    ipcRenderer.on('onFetchMetadataComplete', (event, files) => this.handleOnFetchMetadataComplete(files));
+    ipcRenderer.on('onFileConvertProgress', (event, { id, percent }) => this.handleOnFileConvertProgress(id, percent));
+    ipcRenderer.on('onFileConvertEnd', (event, { id, outputPath }) => this.handleOnFileConvertEnd(id, outputPath));
+  }
 
-    ipcRenderer.on('onFileConvertProgress', (event, { percent, index }) => {
-      const files = this.state.files.map(file => { return { ...file } });
-      const fileDuration = files[index].meta.duration;
-      files[index].progress = percent;
-      this.setState({ files: files });
-    });
+  handleOnFetchMetadataComplete = (files) => {
+    this.setState({ files: [...this.state.files, ...files] })
+  }
 
-    ipcRenderer.on('onFileConvertEnd', (event, { outputPath, index }) => {
-      const files = this.state.files.map(file => { return { ...file } });
-      files[index].progress = '100';
-      this.setState({ files: files });
-    });
+  handleOnFileConvertProgress = (id, percent) => {
+    const files = this.state.files.map(file => { return { ...file } });
+    const index = files.findIndex(file => file.id === id);
+    files[index].progress = percent;
+    this.setState({ files: files });
+  }
+
+  handleOnFileConvertEnd = (id, outputPath) => {
+    const files = this.state.files.map(file => { return { ...file } });
+    const index = files.findIndex(file => file.id === id);
+    files[index].complete = true;
+    files[index].outputPath = outputPath;
+    this.setState({ files: files });
   }
 
   // Dropzone

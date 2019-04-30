@@ -31,20 +31,20 @@ app.on('window-all-closed', () => {
 });
 
 ipcMain.on('onFilesAdded', (event, files) => {
-    const promises = files.map(file => {
+    Promise.all(files.map(file => {
         return new Promise((resolve, reject) => {
             ffmpeg.ffprobe(file.path, (err, meta) => {
                 resolve({ ...file, meta });
             });
         });
+    })).then(filesWithMetadata => {
+        mainWindow.webContents.send('onFetchMetadataComplete', filesWithMetadata)
     });
-    Promise.all(promises)
-        .then(res => mainWindow.webContents.send('onFetchMetaDataComplete', res));
 });
 
-// Check if file exists in directory - overwrite.
+// TODO Check if file exists in directory - overwrite.
 ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat, saveLocation, saveToCurrentDirectory }) => {
-    files.forEach((file, index) => {
+    files.forEach(file => {
         const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
         const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
 
@@ -55,8 +55,8 @@ ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat,
             const outputPath = path.join(outputDirectory, outputFilename);
             ffmpeg(file.path)
                 .output(outputPath)
-                .on('progress', ({ percent }) => mainWindow.webContents.send('onFileConvertProgress', { file, percent, index }))
-                .on('end', () => mainWindow.webContents.send('onFileConvertEnd', { outputPath, index }))
+                .on('progress', ({ percent }) => mainWindow.webContents.send('onFileConvertProgress', { id: file.id, percent }))
+                .on('end', () => mainWindow.webContents.send('onFileConvertEnd', { id: file.id, outputPath }))
                 .run();
         }
     });

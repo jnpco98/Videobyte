@@ -13,7 +13,7 @@ const PreviewFile = styled.video`
 
 `;
 
-// Convert video before passing 
+// TODO Convert video before passing 
 const Preview = ({ selectedFile }) => {
   return (
     <Wrapper>

@@ -56,16 +56,13 @@ class App extends Component {
 
   // Dropzone
   addFiles = (files) => {
-    const paths = this.state.files.map(file => file.path);
-    const filtered = files.filter(file => !paths.includes(file.path));
-
-    ipcRenderer.send('onFilesAdded', filtered);
+    const idArr = this.state.files.map(file => file.id);
+    ipcRenderer.send('onFilesAdded', files.filter(file => !idArr.includes(file.id)));
   }
 
   // File list
-  removeFiles = (files) => {
-    const toRemove = files.map(file => file.path);
-    this.setState({ files: this.state.files.filter(file => !toRemove.includes(file.path)) });
+  removeFiles = (idArr) => {
+    this.setState({ files: this.state.files.filter(file => !idArr.includes(file.id)) });
   }
 
   // Preview

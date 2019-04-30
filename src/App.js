@@ -115,12 +115,23 @@ class App extends Component {
       <Wrapper>
         <GlobalStyle />
         <InnerWrapper>
-          <FileList files={files} removeFiles={this.removeFiles} setSelectedFile={this.setSelectedFile} openDirectory={this.openDirectory} />
+          <FileList
+            files={files}
+            removeFiles={this.removeFiles}
+            setSelectedFile={this.setSelectedFile}
+            openDirectory={this.openDirectory} />
           <FilenameModifier />
-          <FileDrop addFiles={this.addFiles} />
-          <Preview selectedFile={selectedFile} />
-          <FileFormat selectFormat={this.selectFormat} formatIdx={Object.keys(VideoFormat).indexOf(selectedFormat.name)} />
-          <Execution convert={() => this.convertFiles(files)} saveToCurrentDirectory={saveToCurrentDirectory} setSaveToCurrentDirectory={this.setSaveToCurrentDirectory} />
+          <FileDrop
+            addFiles={this.addFiles} />
+          <Preview
+            selectedFile={selectedFile} />
+          <FileFormat
+            selectFormat={this.selectFormat}
+            formatIdx={Object.keys(VideoFormat).indexOf(selectedFormat.name)} />
+          <Execution
+            convert={() => this.convertFiles(files)}
+            saveToCurrentDirectory={saveToCurrentDirectory}
+            setSaveToCurrentDirectory={this.setSaveToCurrentDirectory} />
         </InnerWrapper>
       </Wrapper>
     );

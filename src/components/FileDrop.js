@@ -30,18 +30,15 @@ const FileDrop = ({ addFiles }) => {
   }
 
   // TODO Accept other video formats
+  // TODO Return a different component for each.
   return (
     <Wrapper>
       <Dropzone onDrop={handleOnDrop} multiple={true} accept={'video/*'}>
         {
-          ({ isDragActive, isDragAccept, isDragReject }) => {
-            return (
-              <div>
-                {/* // TODO: Return a different component for each. */}
-                <p>Drag 'n' drop some files here, or click to select files.</p>
-              </div>
-            );
-          }
+          ({ isDragActive, isDragAccept, isDragReject }) =>
+            <div>
+              <p>Drag 'n' drop some files here, or click to select files.</p>
+            </div>
         }
       </Dropzone>
     </Wrapper>

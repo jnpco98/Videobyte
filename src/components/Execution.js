@@ -14,7 +14,8 @@ const Wrapper = styled.div`
   padding: 0 1rem;
 `;
 
-const SaveDirectory = styled.div``;
+const SaveDirectory = styled.div`
+`;
 
 const SaveToDirectoryCheck = styled.input.attrs({ type: 'checkbox' })`
 `;
@@ -51,14 +52,13 @@ const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory 
       <SaveDirectory>
         <div>
           <PathLabel> Folder: </PathLabel>
-          <PathName disabled={saveToCurrentDirectory} id='inputPath' />
+          <PathName id='inputPath' disabled={saveToCurrentDirectory}  />
         </div>
         <div>
           <SaveToDirectoryCheck checked={saveToCurrentDirectory} onChange={() => setSaveToCurrentDirectory(!saveToCurrentDirectory)} />
           <SaveToDirectoryLabel> Save to current directory </SaveToDirectoryLabel>
         </div>
       </SaveDirectory>
-
       <Operation>
         <Cancel>Cancel</Cancel>
         <Convert onClick={() => convert()}>Convert</Convert>

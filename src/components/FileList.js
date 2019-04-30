@@ -24,11 +24,14 @@ const RemoveFile = styled.i`
 const FileInfo = styled.div`
 `;
 
-const Filename = styled.p``;
+const Filename = styled.p`
+`;
 
-const FileDuration = styled.p``;
+const FileDuration = styled.p`
+`;
 
-const Progress = styled.p``;
+const Progress = styled.p`
+`;
 
 const FileList = ({ files, removeFiles, setSelectedFile }) => {
   return (
@@ -38,12 +41,14 @@ const FileList = ({ files, removeFiles, setSelectedFile }) => {
           const { meta, name, path } = file;
           return (
             <Item key={path} onClick={() => setSelectedFile(file)}>
-              <RemoveFile onClick={() => removeFiles([file])}>Remove</RemoveFile>
+              <RemoveFile onClick={() => removeFiles([file.id])}>Remove</RemoveFile>
+
               <FileInfo>
                 <Filename>{name}</Filename>
                 <FileDuration>{meta.format.duration}</FileDuration>
               </FileInfo>
-              <Progress>{(file.progress ? file.progress : 0) + '%'}</Progress>
+
+              <Progress>{file.progress + '%'}</Progress>
             </Item>
           );
         })

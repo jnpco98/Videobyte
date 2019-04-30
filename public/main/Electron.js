@@ -43,7 +43,7 @@ ipcMain.on('onFilesAdded', (event, files) => {
 });
 
 // Check if file exists in directory - overwrite.
-ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory }, { outputFormat }, { prefix, suffix }) => {
+ipcMain.on('onFilesConvertStart', (event, files, { saveLocation, saveToCurrentDirectory, outputFormat, prefix, suffix }) => {
     files.forEach((file, index) => {
         const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
         const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;

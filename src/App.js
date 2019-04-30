@@ -82,24 +82,30 @@ class App extends Component {
 
   // Execution
   convertFiles = (files) => {
-    if (files.length > 0)
+    if (files.length > 0) {
       ipcRenderer.send('onFilesConvertStart', files,
-        { saveLocation: document.getElementById('inputPath').value, saveToCurrentDirectory: this.state.saveToCurrentDirectory },
-        { outputFormat: this.state.selectedFormat },
-        { prefix: document.getElementById('inputPrefix').value, suffix: document.getElementById('inputSuffix').value });
+        {
+          saveLocation: document.getElementById('inputPath').value,
+          saveToCurrentDirectory: this.state.saveToCurrentDirectory,
+          outputFormat: this.state.selectedFormat,
+          prefix: document.getElementById('inputPrefix').value,
+          suffix: document.getElementById('inputSuffix').value
+        });
+    }
   }
 
   render() {
+    const { files, selectedFile, selectedFormat, saveToCurrentDirectory } = this.state;
     return (
       <Wrapper>
         <GlobalStyle />
         <InnerWrapper>
-          <FileList files={this.state.files} removeFiles={this.removeFiles} setSelectedFile={this.setSelectedFile} />
+          <FileList files={files} removeFiles={this.removeFiles} setSelectedFile={this.setSelectedFile} />
           <FilenameModifier />
           <FileDrop addFiles={this.addFiles} />
-          <Preview selectedFile={this.state.selectedFile} /> {/**convert video before passing */}
-          <FileFormat selectFormat={this.selectFormat} formatIdx={Object.keys(VideoFormat).indexOf(this.state.selectedFormat.name)} />
-          <Execution convert={() => this.convertFiles(this.state.files)} saveToCurrentDirectory={this.state.saveToCurrentDirectory} setSaveToCurrentDirectory={this.setSaveToCurrentDirectory} />
+          <Preview selectedFile={selectedFile} />
+          <FileFormat selectFormat={this.selectFormat} formatIdx={Object.keys(VideoFormat).indexOf(selectedFormat.name)} />
+          <Execution convert={() => this.convertFiles(files)} saveToCurrentDirectory={saveToCurrentDirectory} setSaveToCurrentDirectory={this.setSaveToCurrentDirectory} />
         </InnerWrapper>
       </Wrapper>
     );

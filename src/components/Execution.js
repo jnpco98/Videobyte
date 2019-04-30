@@ -51,12 +51,12 @@ const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory 
     <Wrapper>
       <SaveDirectory>
         <div>
-          <PathLabel> Folder: </PathLabel>
-          <PathName id='inputPath' disabled={saveToCurrentDirectory}  />
+          <PathLabel>Destination:</PathLabel>
+          <PathName id='inputPath' disabled={saveToCurrentDirectory} />
         </div>
         <div>
-          <SaveToDirectoryCheck checked={saveToCurrentDirectory} onChange={() => setSaveToCurrentDirectory(!saveToCurrentDirectory)} />
-          <SaveToDirectoryLabel> Save to current directory </SaveToDirectoryLabel>
+          <SaveToDirectoryCheck id='checkSaveToCurrentDirectory' checked={saveToCurrentDirectory} onChange={() => setSaveToCurrentDirectory(!saveToCurrentDirectory)} />
+          <SaveToDirectoryLabel for='checkSaveToCurrentDirectory'>Save to current directory.</SaveToDirectoryLabel>
         </div>
       </SaveDirectory>
       <Operation>

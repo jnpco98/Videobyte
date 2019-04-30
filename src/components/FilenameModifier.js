@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   min-width: 50vh;
   min-height: 4rem;
   grid-column: 1/6;
-  grid-row: 7/8;
+  grid-row: 8/9;
   display:flex;
   align-items:center;
   padding: 0 1rem;

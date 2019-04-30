@@ -6,9 +6,9 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   background-color:bisque;
   min-width: 50vh;
-  min-height: 30vh;
+  min-height: 10vh;
   grid-column: 1/6;
-  grid-row: 8/11;
+  grid-row: 9/11;
 `;
 
 const Dropzone = styled(_Dropzone)`

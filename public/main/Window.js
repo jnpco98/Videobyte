@@ -4,7 +4,7 @@ const { BrowserWindow, Menu } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 
-const defaultConfig = { width: 800, height: 600, minWidth: 800, minHeight: 600, show: false };
+const defaultConfig = { width: 1024, height: 576, minWidth: 1024, minHeight: 576, show: false };
 
 const defaultMenu = [
     {
@@ -14,11 +14,11 @@ const defaultMenu = [
             { role: 'quit' }
         ]
     }
-];
+]
 
 if (process.platform === 'darwin') {
     defaultMenu.unshift({});
-};
+}
 
 if (process.env.NODE_ENV !== 'production') {
     defaultMenu.push({
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
             { role: 'reload' }
         ]
     });
-};
+}
 
 class Window extends BrowserWindow {
     constructor({ url, config, menu, hidden }) {

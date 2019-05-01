@@ -2,8 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  background-color: coral;
+const Wrapper = styled.div.attrs({
+  className: 'blue-grey darken-4'
+})`
   min-width: 50vh;
   min-height: 4rem;
   grid-column: 1/6;

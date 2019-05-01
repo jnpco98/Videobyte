@@ -3,8 +3,9 @@ import _Dropzone from 'react-dropzone';
 
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  background-color:bisque;
+const Wrapper = styled.div.attrs({
+  className: 'blue-grey darken-4'
+})`
   min-width: 50vh;
   min-height: 10vh;
   grid-column: 1/6;

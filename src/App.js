@@ -9,16 +9,27 @@ import FileFormat from './components/FileFormat';
 import Execution from './components/Execution';
 import Preview from './components/Preview';
 import VideoFormat from './VideoFormat';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css';
 
 const { ipcRenderer } = window.require('electron');
 
-const Wrapper = styled.div`
-  margin: 5vh;
+
+const Wrapper = styled.div.attrs({
+  className: 'blue-grey darken-4'
+})`
+  height: 100vh;
+  display: flex;
+  justify-content:center;
 `;
 
-const InnerWrapper = styled.div`
-  height: 90vh;
+const InnerWrapper = styled.div.attrs({
+  className: 'blue-grey darken-4'
+})`
   display: grid;
+  width: 100%;
+  padding: 1.2rem;
   grid-template-columns: repeat(10, auto);
   grid-template-rows: repeat(10, auto);
 `;
@@ -38,6 +49,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    M.AutoInit();
     ipcRenderer.on('onFetchMetadataComplete', (event, files) => this.handleOnFetchMetadataComplete(files));
     ipcRenderer.on('onFileConvertProgress', (event, { id, percent }) => this.handleOnFileConvertProgress(id, percent));
     ipcRenderer.on('onFileConvertEnd', (event, { id, outputPath }) => this.handleOnFileConvertEnd(id, outputPath));

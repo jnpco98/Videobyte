@@ -2,8 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  background-color:tomato;
+const Wrapper = styled.div.attrs({
+  className: 'blue-grey darken-4'
+})`
   min-width: 40vh;
   min-height: 4rem;
   grid-column: 6/11;
@@ -38,13 +39,17 @@ const Operation = styled.div`
   padding: 0 1rem;
 `;
 
-const Cancel = styled.a`
-  background: green;
-`;
+const Cancel = styled.a.attrs({
+  className: 'transparent btn-large waves-effect white-text',
+})``;
 
-const Convert = styled.a`
-  background: green;
-`;
+const Pause = styled.a.attrs({
+  className: 'transparent btn-large waves-effect white-text'
+})``;
+
+const Icon = styled.i.attrs({
+  className: 'material-icons'
+})``;
 
 const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory }) => {
   return (
@@ -60,8 +65,8 @@ const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory 
         </div>
       </SaveDirectory>
       <Operation>
-        <Cancel>Cancel</Cancel>
-        <Convert onClick={() => convert()}>Convert</Convert>
+        <Cancel><Icon>pause_circle_outline</Icon></Cancel>
+        <Pause onClick={() => convert()}><Icon>play_circle_outline</Icon></Pause>
       </Operation>
     </Wrapper>
   );

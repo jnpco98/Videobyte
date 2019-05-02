@@ -68,6 +68,21 @@ class App extends Component {
     this.setState({ files: files });
   }
 
+  handleOnFileConvertStart = (filesToConvert, size) => {
+    const { selectedFormat, saveToCurrentDirectory } = this.state;
+    if (filesToConvert.length > 0) {
+      ipcRenderer.send('onFilesConvertStart', filesToConvert,
+        {
+          prefix: document.getElementById('inputPrefix').value,
+          suffix: document.getElementById('inputSuffix').value,
+          outputFormat: selectedFormat,
+          saveLocation: document.getElementById('inputPath').value,
+          saveToCurrentDirectory: saveToCurrentDirectory,
+          size: size ? size : null
+        });
+    }
+  }
+
   handleOnFileConvertEnd = (id, outputPath) => {
     const files = this.state.files.map(file => { return { ...file } });
     const index = files.findIndex(file => file.id === id);
@@ -92,7 +107,6 @@ class App extends Component {
     ipcRenderer.send('onDirectoryOpened', outputPath);
   }
 
-  // Preview
   setSelectedFile = (selectedFile) => {
     this.setState({ selectedFile: selectedFile });
   }
@@ -108,19 +122,9 @@ class App extends Component {
   }
 
   // Execution
-  convertFiles = (files) => {
-    const { selectedFormat, saveToCurrentDirectory } = this.state;
+  convertFiles = (files, size) => {
     const filesToConvert = files.filter(file => file.complete === false);
-    if (filesToConvert.length > 0) {
-      ipcRenderer.send('onFilesConvertStart', filesToConvert,
-        {
-          prefix: document.getElementById('inputPrefix').value,
-          suffix: document.getElementById('inputSuffix').value,
-          outputFormat: selectedFormat,
-          saveLocation: document.getElementById('inputPath').value,
-          saveToCurrentDirectory: saveToCurrentDirectory
-        });
-    }
+    this.handleOnFileConvertStart(filesToConvert, size);
   }
 
   render() {

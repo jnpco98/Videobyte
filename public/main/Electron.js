@@ -42,7 +42,7 @@ ipcMain.on('onFilesAdded', (event, files) => {
     });
 });
 
-ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat, saveLocation, saveToCurrentDirectory }) => {
+ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat, saveLocation, saveToCurrentDirectory, size }) => {
     files.forEach(file => {
         const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
         const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
@@ -55,11 +55,12 @@ ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat,
                 path.join(outputDirectory, 'converted_' + outputFilename) :
                 path.join(outputDirectory, outputFilename);
 
-            ffmpeg(file.path)
-                .output(outputPath)
+            let ffmpegCommand = ffmpeg(file.path)
                 .on('progress', ({ percent }) => mainWindow.webContents.send('onFileConvertProgress', { id: file.id, percent }))
-                .on('end', () => mainWindow.webContents.send('onFileConvertEnd', { id: file.id, outputPath }))
-                .run();
+                .on('end', () => mainWindow.webContents.send('onFileConvertEnd', { id: file.id, outputPath }));
+
+            if (size) ffmpegCommand = ffmpegCommand.size(size);
+            ffmpegCommand.save(outputPath);
         }
     });
 });

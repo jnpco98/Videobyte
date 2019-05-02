@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 const { app, ipcMain, shell } = electron;
+
 let mainWindow;
 
 function createWindow() {
@@ -31,19 +32,22 @@ app.on('window-all-closed', () => {
 });
 
 ipcMain.on('onFilesAdded', (event, files) => {
-    Promise.all(files.map(file => {
-        return new Promise((resolve, reject) => {
-            ffmpeg.ffprobe(file.path, (err, meta) => {
-                resolve({ ...file, meta });
+    if(mainWindow){
+        Promise.all(files.map(file => {
+            return new Promise((resolve, reject) => {
+                ffmpeg.ffprobe(file.path, (err, meta) => {
+                    resolve({ ...file, meta });
+                });
             });
+        })).then(filesWithMetadata => {
+            mainWindow.webContents.send('onFetchMetadataComplete', filesWithMetadata)
         });
-    })).then(filesWithMetadata => {
-        mainWindow.webContents.send('onFetchMetadataComplete', filesWithMetadata)
-    });
+    };
 });
 
 ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat, saveLocation, saveToCurrentDirectory, size }) => {
-    files.forEach(file => {
+    if(mainWindow){
+        files.forEach(file => {
         const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
         const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
 
@@ -63,6 +67,8 @@ ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat,
             ffmpegCommand.save(outputPath);
         }
     });
+    }
+    
 });
 
 ipcMain.on('onDirectoryOpened', (event, outputPath) => {

@@ -62,8 +62,20 @@ const WindowsControl = styled.div`
 `;
 
 class TitleBar extends React.Component {
-    componentDidMount() {
+    constructor() {
+        super();
 
+        this.state = {
+            maximized: false,
+            focused: true
+        }
+    }
+
+    componentWillMount() {
+        const currentWindow = remote.getCurrentWindow();
+        currentWindow.on('maximize', () => this.setState({ maximized: true }));
+        currentWindow.on('unmaximize', () => this.setState({ maximized: false }));
+        currentWindow.on('focus', () => this.setState({ focused: true }));
     }
 
     menuClick = (event) => {
@@ -84,6 +96,7 @@ class TitleBar extends React.Component {
     }
 
     render() {
+        const { } = this.state;
         return (
             <Wrapper>
                 <MenuButtons>
@@ -92,7 +105,11 @@ class TitleBar extends React.Component {
                 <AppName>FFVideo</AppName>
                 <WindowsControls>
                     <WindowsControl onClick={() => this.minimize()}>&#xE921;</WindowsControl>
-                    <WindowsControl onClick={() => this.maximize()}>&#xE922;</WindowsControl>
+                    {
+                        this.state.maximized ?
+                            <WindowsControl onClick={() => this.maximize()}>&#xE923;</WindowsControl> :
+                            <WindowsControl onClick={() => this.maximize()}>&#xE922;</WindowsControl>
+                    }
                     <WindowsControl onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
                 </WindowsControls>
             </Wrapper>

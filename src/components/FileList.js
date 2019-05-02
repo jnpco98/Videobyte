@@ -62,7 +62,7 @@ const FileList = ({ files, removeFiles, setSelectedFile, openDirectory }) => {
         <SimpleBar style={{ height: '100%' }}>
           {
             files.map(file => {
-              const { id, name, meta, progress, complete } = file;
+              const { id, name, meta, progress, complete, outputPath } = file;
               return (
                 <Item key={id} onClick={() => setSelectedFile(file)}>
                   <RemoveFile onClick={() => removeFiles([id])}>clear</RemoveFile>
@@ -72,7 +72,7 @@ const FileList = ({ files, removeFiles, setSelectedFile, openDirectory }) => {
                     <FileDuration>{meta.format.duration}</FileDuration>
                   </FileInfo>
 
-                  {complete ? <Complete onClick={() => openDirectory(file.path)}>folder</Complete> : <Progress>{progress + '%'}</Progress>}
+                  {complete ? <Complete onClick={() => openDirectory(outputPath)}>folder</Complete> : <Progress>{progress + '%'}</Progress>}
 
                 </Item>
               );

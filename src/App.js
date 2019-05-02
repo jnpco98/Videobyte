@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
+import TitleBar from './components/TitleBar';
 import FileList from './components/FileList';
 import FilenameModifier from './components/FilenameModifier';
 import FileDrop from './components/FileDrop';
@@ -23,7 +24,8 @@ const Wrapper = styled.div.attrs({
 })`
   width: 100%;
   height: 100vh;
-  display: flex;
+  display:flex;
+  flex-direction: column;
   background: rgba(29, 36, 44, 1);
 `;
 
@@ -135,6 +137,7 @@ class App extends Component {
     return (
       <Wrapper>
         <GlobalStyle />
+        <TitleBar />
         <InnerWrapper>
           <FileList
             files={files}

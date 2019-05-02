@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const electron = window.require('electron');
+const { remote, ipcRenderer } = window.require('electron');
 
 const Wrapper = styled.header`
   -webkit-app-region: drag;
@@ -57,23 +57,27 @@ const WindowsControls = styled.a`
 
 
 const TitleBar = () => {
+    const menuClick = (event) => {
+        ipcRenderer.send('displayAppMenu', { x: event.x, y: event.y });
+    }
+
     const minimize = () => {
-        electron.remote.getCurrentWindow().minimize();
+        remote.getCurrentWindow().minimize();
     }
 
     const maximize = () => {
-        const currentWindow = electron.remote.getCurrentWindow();
+        const currentWindow = remote.getCurrentWindow();
         currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize();
     }
 
     const quit = () => {
-        electron.remote.app.quit();
+        remote.app.quit();
     }
 
     return (
         <Wrapper>
             <MenuButtons>
-                <MenuButton />
+                <MenuButton onClick={(event) => menuClick(event)} />
             </MenuButtons>
             <AppName>FFVideo</AppName>
             <WindowsControl>

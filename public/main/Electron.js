@@ -6,7 +6,8 @@ const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const fs = require('fs');
 
-const { app, ipcMain, shell } = electron;
+const { app, Menu, ipcMain, shell } = electron;
+const MenuTemplate = require('./assets/MenuTemplate');
 
 let mainWindow;
 
@@ -31,8 +32,15 @@ app.on('window-all-closed', () => {
     }
 });
 
+ipcMain.on('displayAppMenu', (event, { x, y }) => {
+    const menuTemplate = Menu.buildFromTemplate(MenuTemplate);
+    if (mainWindow) {
+        menuTemplate.popup(x, y);
+    }
+});
+
 ipcMain.on('onFilesAdded', (event, files) => {
-    if(mainWindow){
+    if (mainWindow) {
         Promise.all(files.map(file => {
             return new Promise((resolve, reject) => {
                 ffmpeg.ffprobe(file.path, (err, meta) => {
@@ -46,29 +54,29 @@ ipcMain.on('onFilesAdded', (event, files) => {
 });
 
 ipcMain.on('onFilesConvertStart', (event, files, { prefix, suffix, outputFormat, saveLocation, saveToCurrentDirectory, size }) => {
-    if(mainWindow){
+    if (mainWindow) {
         files.forEach(file => {
-        const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
-        const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
+            const outputDirectory = saveToCurrentDirectory ? path.dirname(file.path) : saveLocation;
+            const outputFilename = prefix + path.parse(file.name).name + suffix + outputFormat.extension;
 
-        if (!fs.existsSync(outputDirectory)) {
-            console.log('Invalid Location: ', outputDirectory);
-        }
-        else {
-            const outputPath = fs.existsSync(path.join(outputDirectory, outputFilename)) ?
-                path.join(outputDirectory, 'converted_' + outputFilename) :
-                path.join(outputDirectory, outputFilename);
+            if (!fs.existsSync(outputDirectory)) {
+                console.log('Invalid Location: ', outputDirectory);
+            }
+            else {
+                const outputPath = fs.existsSync(path.join(outputDirectory, outputFilename)) ?
+                    path.join(outputDirectory, 'converted_' + outputFilename) :
+                    path.join(outputDirectory, outputFilename);
 
-            let ffmpegCommand = ffmpeg(file.path)
-                .on('progress', ({ percent }) => mainWindow.webContents.send('onFileConvertProgress', { id: file.id, percent }))
-                .on('end', () => mainWindow.webContents.send('onFileConvertEnd', { id: file.id, outputPath }));
+                let ffmpegCommand = ffmpeg(file.path)
+                    .on('progress', ({ percent }) => mainWindow.webContents.send('onFileConvertProgress', { id: file.id, percent }))
+                    .on('end', () => mainWindow.webContents.send('onFileConvertEnd', { id: file.id, outputPath }));
 
-            if (size) ffmpegCommand = ffmpegCommand.size(size);
-            ffmpegCommand.save(outputPath);
-        }
-    });
+                if (size) ffmpegCommand = ffmpegCommand.size(size);
+                ffmpegCommand.save(outputPath);
+            }
+        });
     }
-    
+
 });
 
 ipcMain.on('onDirectoryOpened', (event, outputPath) => {

@@ -27,6 +27,7 @@ const Wrapper = styled.div.attrs({
   display:flex;
   flex-direction: column;
   background: rgba(29, 36, 44, 1);
+  overflow: hidden;
 `;
 
 const InnerWrapper = styled.div.attrs({

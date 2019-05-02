@@ -8,20 +8,15 @@ const Wrapper = styled.header`
   width: 100vw;
   height: 2.4rem;
   display:flex;
-  background-color:grey;
 `;
 
 const MenuButtons = styled.div`
-  background-color: white;
-  border: 0.5px red solid;
   display: flex;
   align-items: center;
   flex-grow: 1;
 `;
 
 const AppName = styled.div`
-  background-color: white;
-  border: 0.5px red solid;
   display: flex;
   justify-content:center;
   align-items: center;
@@ -30,7 +25,7 @@ const AppName = styled.div`
 
 const MenuButton = styled.a`
   -webkit-app-region: no-drag;
-  background-color: green;
+  background:green;
   margin-left: 10px;
   margin-right: 10px;
   width: 25px;
@@ -38,11 +33,13 @@ const MenuButton = styled.a`
 `;
 
 const WindowsControls = styled.a`
-  background-color: white;
-  border: 0.5px red solid;
   display: flex;
   justify-content: flex-end;
   flex-grow: 1;
+
+  .win-focused{
+    color:white;
+  }
 `;
 
 const WindowsControl = styled.div`
@@ -54,7 +51,7 @@ const WindowsControl = styled.div`
   margin-left: 10px;
   margin-right: 10px;
   width: 25px;
-  height: 25px;
+  height: 35px;
   opacity: 0.8;
   font-size: 0.7rem;
   font-family: segoe;
@@ -71,11 +68,12 @@ class TitleBar extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const currentWindow = remote.getCurrentWindow();
         currentWindow.on('maximize', () => this.setState({ maximized: true }));
         currentWindow.on('unmaximize', () => this.setState({ maximized: false }));
         currentWindow.on('focus', () => this.setState({ focused: true }));
+        currentWindow.on('blur', () => this.setState({ focused: false }));
     }
 
     menuClick = (event) => {
@@ -96,7 +94,8 @@ class TitleBar extends React.Component {
     }
 
     render() {
-        const { } = this.state;
+        const { maximized, focused } = this.state;
+        const className = focused ? '' : 'win-focused';
         return (
             <Wrapper>
                 <MenuButtons>
@@ -104,13 +103,13 @@ class TitleBar extends React.Component {
                 </MenuButtons>
                 <AppName>FFVideo</AppName>
                 <WindowsControls>
-                    <WindowsControl onClick={() => this.minimize()}>&#xE921;</WindowsControl>
+                    <WindowsControl className={className} onClick={() => this.minimize()}>&#xE921;</WindowsControl>
                     {
-                        this.state.maximized ?
-                            <WindowsControl onClick={() => this.maximize()}>&#xE923;</WindowsControl> :
-                            <WindowsControl onClick={() => this.maximize()}>&#xE922;</WindowsControl>
+                        maximized ?
+                            <WindowsControl className={className} onClick={() => this.maximize()}>&#xE923;</WindowsControl> :
+                            <WindowsControl className={className} onClick={() => this.maximize()}>&#xE922;</WindowsControl>
                     }
-                    <WindowsControl onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
+                    <WindowsControl className={className} onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
                 </WindowsControls>
             </Wrapper>
         );

@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
-  className: 'blue-grey darken-4'
+  id: 'preview',
+  className: 'cyan darken-4'
 })`
-  min-width: 40vh;
-  min-height: 30vh;
-  grid-column: 6/11;
-  grid-row: 1/6;
+  width: 40vw;
+  height: 30vh;
 `;
 
 const PreviewFile = styled.video`

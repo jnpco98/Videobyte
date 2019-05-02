@@ -3,12 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
-  className: 'blue-grey darken-4'
+  id: 'execution',
+  className: 'transparent darken-4'
 })`
-  min-width: 40vh;
-  min-height: 4rem;
-  grid-column: 6/11;
-  grid-row: 9/11;
+  width: 40vw;
+  height: 4rem;
   display:flex;
   justify-content: space-between;
   align-items:center;
@@ -61,7 +60,7 @@ const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory 
         </div>
         <div>
           <SaveToDirectoryCheck id='checkSaveToCurrentDirectory' checked={saveToCurrentDirectory} onChange={() => setSaveToCurrentDirectory(!saveToCurrentDirectory)} />
-          <SaveToDirectoryLabel for='checkSaveToCurrentDirectory'>Save to current directory.</SaveToDirectoryLabel>
+          <SaveToDirectoryLabel htmlFor='checkSaveToCurrentDirectory'>Save to current directory.</SaveToDirectoryLabel>
         </div>
       </SaveDirectory>
       <Operation>

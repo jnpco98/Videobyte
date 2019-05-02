@@ -4,12 +4,11 @@ import _Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
-  className: 'blue-grey darken-4'
+  id:'file-drop', 
+  className: 'transparent darken-4'
 })`
-  min-width: 50vh;
-  min-height: 10vh;
-  grid-column: 1/6;
-  grid-row: 9/11;
+  width: 50vw;
+  height: 10vh;
 `;
 
 const Dropzone = styled(_Dropzone)`

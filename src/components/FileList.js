@@ -5,23 +5,23 @@ import 'simplebar/dist/simplebar.css';
 import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
-  className: 'blue-grey darken-4'
+  id: 'file-list',
+  className: 'red'
 })`
-  min-width: 50vh;
-  min-height: 50vh;
-  grid-column: 1/6;
-  grid-row: 1/8;
+  width: 50vw;
+  height: 50vh;
   padding: 1rem;
+  padding-top: 0;
 `;
 
 const List = styled.ul.attrs({
-  className: 'collection black-text with-header'
+  className: 'collection black-text'
 })`
-  height: 90%;
+  height: 100%;
 `;
 
 const Item = styled.li.attrs({
-  className: 'collection-item teal accent-4'
+  className: 'collection-item grey darken-3'
 })`
   display:flex;
   justify-content: space-between;
@@ -73,6 +73,7 @@ const FileList = ({ files, removeFiles, setSelectedFile, openDirectory }) => {
                   </FileInfo>
 
                   {complete ? <Complete onClick={() => openDirectory(file.path)}>folder</Complete> : <Progress>{progress + '%'}</Progress>}
+
                 </Item>
               );
             })

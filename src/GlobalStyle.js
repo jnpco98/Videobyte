@@ -15,6 +15,36 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.5;
   }
+
+  #file-list{
+    grid-column: 1/3;
+    grid-row: 1/4;
+  }
+
+  #name-modifier{
+    grid-column: 1/3;
+    grid-row: 4/5;
+  } 
+
+  #file-drop{
+    grid-column: 1/3;
+    grid-row: 5/6;
+  }
+
+  #preview{
+    grid-column: 4/5;
+    grid-row: 1/3;
+  }
+
+  #file-format{
+    grid-column: 4/5;
+    grid-row: 3/5;
+  }
+
+  #execution{
+    grid-column: 4/5;
+    grid-row: 5/6;
+  }
 `;
 
 export default GlobalStyle;

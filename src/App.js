@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import FileList from './components/FileList';
 import FilenameModifier from './components/FilenameModifier';
@@ -9,6 +9,7 @@ import FileFormat from './components/FileFormat';
 import Execution from './components/Execution';
 import Preview from './components/Preview';
 import VideoFormat from './VideoFormat';
+
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css';
@@ -17,21 +18,22 @@ const { ipcRenderer } = window.require('electron');
 
 
 const Wrapper = styled.div.attrs({
-  className: 'blue-grey darken-4'
+  className: 'grey darken-4'
 })`
+  width: 100%;
   height: 100vh;
   display: flex;
-  justify-content:center;
 `;
 
 const InnerWrapper = styled.div.attrs({
-  className: 'blue-grey darken-4'
+  className: ''
 })`
   display: grid;
   width: 100%;
-  padding: 1.2rem;
+  padding: 1.2rem;  
   grid-template-columns: repeat(10, auto);
   grid-template-rows: repeat(10, auto);
+  background: rgba(29, 36, 44, 1);
 `;
 
 const INITIAL_FORMAT = 'MP4';
@@ -132,14 +134,14 @@ class App extends Component {
             removeFiles={this.removeFiles}
             setSelectedFile={this.setSelectedFile}
             openDirectory={this.openDirectory} />
-          <FilenameModifier />
-          <FileDrop
-            addFiles={this.addFiles} />
           <Preview
             selectedFile={selectedFile} />
+          <FilenameModifier />
           <FileFormat
             selectFormat={this.selectFormat}
-            formatIdx={Object.keys(VideoFormat).indexOf(selectedFormat.name)} />
+            selectedFormat={selectedFormat} />
+          <FileDrop
+            addFiles={this.addFiles} />
           <Execution
             convert={() => this.convertFiles(files)}
             saveToCurrentDirectory={saveToCurrentDirectory}

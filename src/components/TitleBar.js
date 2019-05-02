@@ -40,6 +40,10 @@ const WindowsControls = styled.a`
   .win-focused{
     color:white;
   }
+
+  .close:hover{
+    background-color: #E81123;
+  }
 `;
 
 const WindowsControl = styled.div`
@@ -49,11 +53,11 @@ const WindowsControl = styled.div`
   text-align:center;
   justify-content:center;
   margin-left: 10px;
-  margin-right: 10px;
-  width: 25px;
-  height: 35px;
+  width: 38px;
+  height: 30px;
   opacity: 0.8;
-  font-size: 0.7rem;
+  font-size: 10px;
+  font-weight: 200;
   font-family: segoe;
   color:grey;
 `;
@@ -70,10 +74,12 @@ class TitleBar extends React.Component {
 
     componentDidMount() {
         const currentWindow = remote.getCurrentWindow();
-        currentWindow.on('maximize', () => this.setState({ maximized: true }));
-        currentWindow.on('unmaximize', () => this.setState({ maximized: false }));
-        currentWindow.on('focus', () => this.setState({ focused: true }));
-        currentWindow.on('blur', () => this.setState({ focused: false }));
+        if (currentWindow) {
+            currentWindow.on('maximize', () => this.setState({ maximized: true }));
+            currentWindow.on('unmaximize', () => this.setState({ maximized: false }));
+            currentWindow.on('focus', () => this.setState({ focused: true }));
+            currentWindow.on('blur', () => this.setState({ focused: false }));
+        }
     }
 
     menuClick = (event) => {
@@ -86,7 +92,9 @@ class TitleBar extends React.Component {
 
     maximize = () => {
         const currentWindow = remote.getCurrentWindow();
-        currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize();
+        if (currentWindow) {
+            currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize();
+        }
     }
 
     quit = () => {
@@ -95,7 +103,7 @@ class TitleBar extends React.Component {
 
     render() {
         const { maximized, focused } = this.state;
-        const className = focused ? '' : 'win-focused';
+        const className = focused ? 'win-focused' : '';
         return (
             <Wrapper>
                 <MenuButtons>
@@ -109,7 +117,7 @@ class TitleBar extends React.Component {
                             <WindowsControl className={className} onClick={() => this.maximize()}>&#xE923;</WindowsControl> :
                             <WindowsControl className={className} onClick={() => this.maximize()}>&#xE922;</WindowsControl>
                     }
-                    <WindowsControl className={className} onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
+                    <WindowsControl className={'close ' + className} onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
                 </WindowsControls>
             </Wrapper>
         );

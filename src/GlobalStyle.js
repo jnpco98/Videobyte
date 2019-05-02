@@ -14,6 +14,8 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: optimizeLegibility !important;
     line-height: 1.5;
     background: rgba(29, 36, 44, 1);
   }

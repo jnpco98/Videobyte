@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import segoe from './assets/fonts/segmdl2.ttf';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -15,6 +16,11 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.5;
     background: rgba(29, 36, 44, 1);
+  }
+
+  @font-face {
+    font-family: segoe;
+    src: url(${segoe});
   }
 
   .transparent{

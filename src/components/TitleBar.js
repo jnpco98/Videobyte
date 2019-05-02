@@ -20,19 +20,10 @@ const MenuButtons = styled.div`
 `;
 
 const AppName = styled.div`
-    background-color: white;
-    border: 0.5px red solid;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    flex-grow: 1;
-`;
-
-const WindowsControl = styled.div`
   background-color: white;
   border: 0.5px red solid;
   display: flex;
-  justify-content: flex-end;
+  justify-content:center;
   align-items: center;
   flex-grow: 1;
 `;
@@ -47,46 +38,66 @@ const MenuButton = styled.a`
 `;
 
 const WindowsControls = styled.a`
+  background-color: white;
+  border: 0.5px red solid;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+`;
+
+const WindowsControl = styled.div`
   -webkit-app-region: no-drag;
-  background-color: green;
+  display:flex;
+  align-items: center;
+  text-align:center;
+  justify-content:center;
   margin-left: 10px;
   margin-right: 10px;
   width: 25px;
   height: 25px;
+  opacity: 0.8;
+  font-size: 0.7rem;
+  font-family: segoe;
+  color:grey;
 `;
 
+class TitleBar extends React.Component {
+    componentDidMount() {
 
-const TitleBar = () => {
-    const menuClick = (event) => {
+    }
+
+    menuClick = (event) => {
         ipcRenderer.send('displayAppMenu', { x: event.x, y: event.y });
     }
 
-    const minimize = () => {
+    minimize = () => {
         remote.getCurrentWindow().minimize();
     }
 
-    const maximize = () => {
+    maximize = () => {
         const currentWindow = remote.getCurrentWindow();
         currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize();
     }
 
-    const quit = () => {
+    quit = () => {
         remote.app.quit();
     }
 
-    return (
-        <Wrapper>
-            <MenuButtons>
-                <MenuButton onClick={(event) => menuClick(event)} />
-            </MenuButtons>
-            <AppName>FFVideo</AppName>
-            <WindowsControl>
-                <WindowsControls onClick={() => minimize()} />
-                <WindowsControls onClick={() => maximize()} />
-                <WindowsControls onClick={() => quit()} />
-            </WindowsControl>
-        </Wrapper>
-    );
+    render() {
+        return (
+            <Wrapper>
+                <MenuButtons>
+                    <MenuButton onClick={(event) => this.menuClick(event)} />
+                </MenuButtons>
+                <AppName>FFVideo</AppName>
+                <WindowsControls>
+                    <WindowsControl onClick={() => this.minimize()}>&#xE921;</WindowsControl>
+                    <WindowsControl onClick={() => this.maximize()}>&#xE922;</WindowsControl>
+                    <WindowsControl onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
+                </WindowsControls>
+            </Wrapper>
+        );
+    }
 };
 
 export default TitleBar;

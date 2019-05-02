@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const electron = window.require('electron');
+
 const Wrapper = styled.header`
   -webkit-app-region: drag;
   width: 100vw;
@@ -53,7 +55,21 @@ const WindowsControls = styled.a`
   height: 25px;
 `;
 
+
 const TitleBar = () => {
+    const minimize = () => {
+        electron.remote.getCurrentWindow().minimize();
+    }
+
+    const maximize = () => {
+        const currentWindow = electron.remote.getCurrentWindow();
+        currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize();
+    }
+
+    const quit = () => {
+        electron.remote.app.quit();
+    }
+
     return (
         <Wrapper>
             <MenuButtons>
@@ -61,9 +77,9 @@ const TitleBar = () => {
             </MenuButtons>
             <AppName>FFVideo</AppName>
             <WindowsControl>
-                <WindowsControls/>
-                <WindowsControls/>
-                <WindowsControls/> 
+                <WindowsControls onClick={() => minimize()} />
+                <WindowsControls onClick={() => maximize()} />
+                <WindowsControls onClick={() => quit()} />
             </WindowsControl>
         </Wrapper>
     );

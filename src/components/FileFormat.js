@@ -2,7 +2,6 @@ import React from 'react';
 
 import VideoFormat from '../VideoFormat';
 import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.css';
 import styled from 'styled-components';
 import M from 'materialize-css';
 
@@ -10,10 +9,9 @@ const Wrapper = styled.div.attrs({
   id: 'file-format',
   className: 'yellow darken-4 input-field'
 })`
-  width: 40vw;
-  height: 40vh;
-  padding: 1rem;
-  padding-top: 0;
+  min-width: 40vw;
+  min-height: 40vh;
+  padding: 0 0.5rem 1rem 0.5rem;
 `;
 
 const TypeSelect = styled.select.attrs({

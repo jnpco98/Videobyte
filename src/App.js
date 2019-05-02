@@ -12,17 +12,19 @@ import VideoFormat from './VideoFormat';
 
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
+import 'simplebar/dist/simplebar.css';
 import M from 'materialize-css';
 
 const { ipcRenderer } = window.require('electron');
 
 
 const Wrapper = styled.div.attrs({
-  className: 'grey darken-4'
+  className: ''
 })`
   width: 100%;
   height: 100vh;
   display: flex;
+  background: rgba(29, 36, 44, 1);
 `;
 
 const InnerWrapper = styled.div.attrs({
@@ -30,6 +32,7 @@ const InnerWrapper = styled.div.attrs({
 })`
   display: grid;
   width: 100%;
+  height: 95vh;
   padding: 1.2rem;  
   grid-template-columns: repeat(10, auto);
   grid-template-rows: repeat(10, auto);

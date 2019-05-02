@@ -14,6 +14,11 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.5;
+    background: rgba(29, 36, 44, 1);
+  }
+
+  .transparent{
+    background-color: transparent !important;
   }
   
   #file-list{

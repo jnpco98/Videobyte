@@ -6,8 +6,8 @@ const Wrapper = styled.div.attrs({
   id: 'name-modifier',
   className: 'green darken-4'
 })`
-  width: 50vw;
-  height: 4rem;
+  min-width: 50vw;
+  min-height: 4rem;
   display:flex;
   align-items:center;
   padding: 0 1rem;

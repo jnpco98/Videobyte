@@ -5,8 +5,8 @@ const Wrapper = styled.div.attrs({
   id: 'preview',
   className: 'cyan darken-4'
 })`
-  width: 40vw;
-  height: 30vh;
+  min-width: 40vw;
+  min-height: 30vh;
   display: flex;
   justify-content:center;
   align-items:center;

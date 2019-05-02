@@ -1,17 +1,16 @@
 import React from 'react';
 
 import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.css';
 import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
   id: 'file-list',
   className: 'red'
 })`
-  width: 50vw;
-  height: 65vh;
-  padding: 1rem;
-  padding-top: 0;
+  min-width: 50vw;
+  min-height: 30vh;
+  padding: 0 0.5rem 1rem 0.5rem;
+
 `;
 
 const List = styled.ul.attrs({

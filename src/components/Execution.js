@@ -6,8 +6,8 @@ const Wrapper = styled.div.attrs({
   id: 'execution',
   className: 'transparent darken-4'
 })`
-  width: 40vw;
-  height: 4rem;
+  min-width: 40vw;
+  min-height: 4rem;
   display:flex;
   justify-content: space-between;
   align-items:center;

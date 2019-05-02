@@ -62,7 +62,7 @@ class FileFormat extends React.Component {
               Object.keys(VideoFormat).map(key => {
                 const videoFormat = VideoFormat[key];
                 return (
-                  <Format className={videoFormat.name === selectedFormat.name ? 'active' : ''} onClick={() => selectFormat(videoFormat)}>
+                  <Format className={videoFormat.name === selectedFormat.name ? 'active' : ''} key={key} onClick={() => selectFormat(videoFormat)}>
                     <FormatName>{videoFormat.name}</FormatName>
                     <FormatDescription>{videoFormat.extension}</FormatDescription>
                   </Format>

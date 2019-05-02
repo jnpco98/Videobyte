@@ -15,35 +15,35 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.5;
   }
-
+  
   #file-list{
-    grid-column: 1/3;
-    grid-row: 1/4;
+    grid-column: 1/6;
+    grid-row: 1/6;
   }
 
   #name-modifier{
-    grid-column: 1/3;
-    grid-row: 4/5;
+    grid-column: 1/6;
+    grid-row: 6/7;
   } 
 
   #file-drop{
-    grid-column: 1/3;
-    grid-row: 5/6;
+    grid-column: 1/6;
+    grid-row: 7/11;
   }
 
   #preview{
-    grid-column: 4/5;
-    grid-row: 1/3;
+    grid-column: 6/11;
+    grid-row: 1/4;
   }
 
   #file-format{
-    grid-column: 4/5;
-    grid-row: 3/5;
+    grid-column: 6/11;
+    grid-row: 4/9;
   }
 
   #execution{
-    grid-column: 4/5;
-    grid-row: 5/6;
+    grid-column: 6/11;
+    grid-row: 9/11;
   }
 `;
 

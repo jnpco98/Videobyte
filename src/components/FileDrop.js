@@ -8,7 +8,7 @@ const Wrapper = styled.div.attrs({
   className: 'transparent darken-4'
 })`
   width: 50vw;
-  height: 10vh;
+  /* height: 10vh; */
 `;
 
 const Dropzone = styled(_Dropzone)`

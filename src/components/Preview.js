@@ -7,6 +7,9 @@ const Wrapper = styled.div.attrs({
 })`
   width: 40vw;
   height: 30vh;
+  display: flex;
+  justify-content:center;
+  align-items:center;
 `;
 
 const PreviewFile = styled.video`
@@ -14,12 +17,23 @@ const PreviewFile = styled.video`
 `;
 
 // TODO Convert video before passing 
-const Preview = ({ selectedFile }) => {
-  return (
-    <Wrapper>
-      {/* <PreviewFile width='480px' height='360px' controls={true}><source src={selectedFile.path} type={selectedFile.type} /></PreviewFile> */}
-    </Wrapper>
-  );
+class Preview extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      previewVideo: {}
+    }
+  }
+
+  render() {
+    const { selectedFile } = this.props;
+    return (
+      <Wrapper>
+        <PreviewFile width='70%' height='100%' controls={true}><source src={this.state.previewVideo} type='video/mp4' /></PreviewFile>
+      </Wrapper>
+    );
+  }
 };
 
 export default Preview;

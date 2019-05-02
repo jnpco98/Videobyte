@@ -9,7 +9,7 @@ const Wrapper = styled.div.attrs({
   className: 'red'
 })`
   width: 50vw;
-  height: 50vh;
+  height: 65vh;
   padding: 1rem;
   padding-top: 0;
 `;
@@ -70,7 +70,7 @@ const FileList = ({ files, removeFiles, setSelectedFile, openDirectory }) => {
                     <Filename>{name}</Filename>
                     <FileDuration>{meta.format.duration}</FileDuration>
                   </FileInfo>
-                  { complete ? <Complete onClick={() => openDirectory(outputPath)}>folder</Complete> : <Progress>{progress + '%'}</Progress> }
+                  {complete ? <Complete onClick={() => openDirectory(outputPath)}>folder</Complete> : <Progress>{progress + '%'}</Progress>}
                 </Item>
               );
             })

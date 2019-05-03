@@ -26,10 +26,10 @@ const Item = styled.li.attrs({
   justify-content: space-between;
   align-items:center;
   &&&{
-    background: rgba(29, 36, 44, 1);
+    background: rgba(1, 22, 39, 1);
   }
   &&&.active{
-    background: rgba(23,58, 66, 1);
+    background: rgba(23, 58, 66, 1);
   }
 `;
 

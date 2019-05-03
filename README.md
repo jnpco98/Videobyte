@@ -21,3 +21,9 @@ Just drag all your files and instantly convert all of them to the desired video/
 ## Production
 
 N/A
+
+- [ ] Implement convert queue.
+- [ ] Implement covert pause.
+- [ ] Implement convert stop.
+- [ ] Implement other codec convertion.
+- [ ] Implement video resolution selection.

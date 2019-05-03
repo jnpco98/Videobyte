@@ -38,6 +38,7 @@ const Format = styled.li.attrs({
     }
   }
   &&&:hover{
+    color:white;
     background-color: rgba(0, 191, 165, 0.8);
   }
 `;

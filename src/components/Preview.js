@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
   id: 'preview',
-  className: 'cyan darken-4'
+  className: 'transparent'
 })`
   min-width: 40vw;
   min-height: 30vh;
@@ -52,7 +52,9 @@ class Preview extends React.Component {
             <p>Size: {size}</p>
             <p>Creation: {tags.creation_time}</p>
           </FileInfo>
-          <PreviewFile controls={true}><source src={this.state.previewVideo} type='video/mp4' /></PreviewFile>
+          <PreviewFile controls={true}>
+            <source src={this.state.previewVideo} type='video/mp4' />
+          </PreviewFile>
         </Wrapper>
       );
     }

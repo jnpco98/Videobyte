@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     text-rendering: optimizeLegibility !important;
     line-height: 1.5;
-    background: rgba(29, 36, 44, 1);
+    color: rgba(102, 126, 146, 1);
   }
 
   @font-face {
@@ -25,8 +25,8 @@ const GlobalStyle = createGlobalStyle`
     src: url(${segoe});
   }
 
-  .transparent{
-    background-color: transparent !important;
+  .selected{
+    background: rgba(3, 129, 138, 1);
   }
   
   #file-list{

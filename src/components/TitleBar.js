@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 const { remote, ipcRenderer } = window.require('electron');
 
-const Wrapper = styled.header`
+const Wrapper = styled.header.attrs({
+  className: 'transparent'
+})`
   -webkit-app-region: drag;
   width: 100vw;
-  height: 2.4rem;
+  height: 2.2rem;
   display:flex;
 `;
 
@@ -25,7 +27,6 @@ const AppName = styled.div`
 
 const MenuButton = styled.a`
   -webkit-app-region: no-drag;
-  background:green;
   margin-left: 10px;
   margin-right: 10px;
   width: 25px;
@@ -63,65 +64,65 @@ const WindowsControl = styled.div`
 `;
 
 class TitleBar extends React.Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            maximized: false,
-            focused: true
-        }
+    this.state = {
+      maximized: false,
+      focused: true
     }
+  }
 
-    componentDidMount() {
-        const currentWindow = remote.getCurrentWindow();
-        if (currentWindow) {
-            currentWindow.on('maximize', () => this.setState({ maximized: true }));
-            currentWindow.on('unmaximize', () => this.setState({ maximized: false }));
-            currentWindow.on('focus', () => this.setState({ focused: true }));
-            currentWindow.on('blur', () => this.setState({ focused: false }));
-        }
+  componentDidMount() {
+    const currentWindow = remote.getCurrentWindow();
+    if (currentWindow) {
+      currentWindow.on('maximize', () => this.setState({ maximized: true }));
+      currentWindow.on('unmaximize', () => this.setState({ maximized: false }));
+      currentWindow.on('focus', () => this.setState({ focused: true }));
+      currentWindow.on('blur', () => this.setState({ focused: false }));
     }
+  }
 
-    menuClick = (event) => {
-        ipcRenderer.send('displayAppMenu', { x: event.x, y: event.y });
-    }
+  menuClick = (event) => {
+    ipcRenderer.send('displayAppMenu', { x: event.x, y: event.y });
+  }
 
-    minimize = () => {
-        remote.getCurrentWindow().minimize();
-    }
+  minimize = () => {
+    remote.getCurrentWindow().minimize();
+  }
 
-    maximize = () => {
-        const currentWindow = remote.getCurrentWindow();
-        if (currentWindow) {
-            currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize();
-        }
+  maximize = () => {
+    const currentWindow = remote.getCurrentWindow();
+    if (currentWindow) {
+      currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize();
     }
+  }
 
-    quit = () => {
-        remote.app.quit();
-    }
+  quit = () => {
+    remote.app.quit();
+  }
 
-    render() {
-        const { maximized, focused } = this.state;
-        const className = focused ? 'win-focused' : '';
-        return (
-            <Wrapper>
-                <MenuButtons>
-                    <MenuButton onClick={(event) => this.menuClick(event)} />
-                </MenuButtons>
-                <AppName>FFVideo</AppName>
-                <WindowsControls>
-                    <WindowsControl className={className} onClick={() => this.minimize()}>&#xE921;</WindowsControl>
-                    {
-                        maximized ?
-                            <WindowsControl className={className} onClick={() => this.maximize()}>&#xE923;</WindowsControl> :
-                            <WindowsControl className={className} onClick={() => this.maximize()}>&#xE922;</WindowsControl>
-                    }
-                    <WindowsControl className={'close ' + className} onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
-                </WindowsControls>
-            </Wrapper>
-        );
-    }
+  render() {
+    const { maximized, focused } = this.state;
+    const className = focused ? 'win-focused' : '';
+    return (
+      <Wrapper>
+        <MenuButtons>
+          <MenuButton onClick={(event) => this.menuClick(event)} />
+        </MenuButtons>
+        <AppName>FFVideo</AppName>
+        <WindowsControls>
+          <WindowsControl className={className} onClick={() => this.minimize()}>&#xE921;</WindowsControl>
+          {
+            maximized ?
+              <WindowsControl className={className} onClick={() => this.maximize()}>&#xE923;</WindowsControl> :
+              <WindowsControl className={className} onClick={() => this.maximize()}>&#xE922;</WindowsControl>
+          }
+          <WindowsControl className={'close ' + className} onClick={() => this.quit()}>&#xE8BB;</WindowsControl>
+        </WindowsControls>
+      </Wrapper>
+    );
+  }
 };
 
 export default TitleBar;

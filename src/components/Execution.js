@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
   id: 'execution',
-  className: 'transparent darken-4'
+  className: 'transparent'
 })`
   min-width: 40vw;
   min-height: 4rem;
@@ -21,10 +21,12 @@ const SaveToDirectoryCheck = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const SaveToDirectoryLabel = styled.label`
+  color: rgba(102,126,146,1);
 `;
 
 const PathLabel = styled.label`
   margin-right: 0.8rem;
+  color: rgba(102,126,146,1);
 `;
 
 const PathName = styled.input`
@@ -39,16 +41,18 @@ const Operation = styled.div`
 `;
 
 const Cancel = styled.a.attrs({
-  className: 'transparent btn-large waves-effect white-text',
+  className: 'transparent btn-large waves-effect',
 })``;
 
 const Pause = styled.a.attrs({
-  className: 'transparent btn-large waves-effect white-text'
+  className: 'transparent btn-large waves-effect'
 })``;
 
 const Icon = styled.i.attrs({
   className: 'material-icons'
-})``;
+})`
+  color: rgba(102,126,146,1);
+`;
 
 const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory }) => {
   return (

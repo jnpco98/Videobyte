@@ -3,34 +3,35 @@ import React from 'react';
 import VideoFormat from '../VideoFormat';
 import SimpleBar from 'simplebar-react';
 import styled from 'styled-components';
-import M from 'materialize-css';
 
 const Wrapper = styled.div.attrs({
   id: 'file-format',
-  className: 'yellow darken-4 input-field'
+  className: 'transparent input-field'
 })`
   min-width: 40vw;
   min-height: 40vh;
   padding: 0 0.5rem 1rem 0.5rem;
-`;
 
-const TypeSelect = styled.select.attrs({
-  className: ''
-})`
 `;
 
 const List = styled.ul.attrs({
-  className: 'collection black-text'
+  className: 'collection'
 })`
   height: 100%;
 `;
 
 const Format = styled.li.attrs({
-  className: 'collection-item grey darken-3'
+  className: 'collection-item'
 })`
   display:flex;
   justify-content: space-between;
   align-items:center;
+  &&&{
+    background: rgba(29, 36, 44, 1);
+  }
+  &&&.active{
+    background: rgba(23,58, 66, 1);
+  }
 `;
 
 const FormatName = styled.p.attrs({
@@ -44,12 +45,6 @@ const FormatDescription = styled.p.attrs({
 `;
 
 class FileFormat extends React.Component {
-  componentDidMount() {
-    if (this.inputFormat) {
-      M.FormSelect.getInstance(this.inputFormat);
-    }
-  }
-
   render() {
     const { selectFormat, selectedFormat } = this.props;
     return (

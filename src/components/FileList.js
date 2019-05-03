@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div.attrs({
   id: 'file-list',
-  className: 'red'
+  className: 'transparent'
 })`
   min-width: 50vw;
   min-height: 30vh;
@@ -14,17 +14,23 @@ const Wrapper = styled.div.attrs({
 `;
 
 const List = styled.ul.attrs({
-  className: 'collection black-text'
+  className: 'collection'
 })`
   height: 100%;
 `;
 
 const Item = styled.li.attrs({
-  className: 'collection-item grey darken-3'
+  className: 'collection-item'
 })`
   display:flex;
   justify-content: space-between;
   align-items:center;
+  &&&{
+    background: rgba(29, 36, 44, 1);
+  }
+  &&&.active{
+    background: rgba(23,58, 66, 1);
+  }
 `;
 
 const RemoveFile = styled.i.attrs({
@@ -54,7 +60,7 @@ const Complete = styled.i.attrs({
   color:white
 `;
 
-const FileList = ({ files, removeFiles, setSelectedFile, openDirectory }) => {
+const FileList = ({ files, removeFiles, selectedFile, setSelectedFile, openDirectory }) => {
   return (
     <Wrapper>
       <List>
@@ -63,7 +69,7 @@ const FileList = ({ files, removeFiles, setSelectedFile, openDirectory }) => {
             files.map(file => {
               const { id, name, meta, progress, complete, outputPath } = file;
               return (
-                <Item key={id} onClick={() => setSelectedFile(file)}>
+                <Item key={id} className={file.name === selectedFile.name ? 'active' : ''} onClick={() => setSelectedFile(file)}>
                   <RemoveFile onClick={() => removeFiles([id])}>clear</RemoveFile>
                   <FileInfo>
                     <Filename>{name}</Filename>

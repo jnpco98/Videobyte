@@ -18,8 +18,11 @@ const Dropzone = styled(_Dropzone)`
   text-align:center;
   align-items:center;
   justify-content: center;
-  border: 2px dashed gray;
+  border: 2px dashed rgba(102, 126, 146, 1);
   border-radius: 5px;
+  &&&{
+    background: rgba(29, 37, 44, 1);
+  }
 `;
 
 const FileDrop = ({ addFiles }) => {

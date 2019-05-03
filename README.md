@@ -1,5 +1,5 @@
 # FFVideo
-Video converter app made with Electron + React + Redux + FFmpeg. Just drag your files, click start, and you're good to go. It supports a ton of video formats and also includes video resizing, and audio extraction. Windows, Linux, and Mac are supported.
+Audio/Video converter app made with Electron + React + Redux + FFmpeg. Drag your files, click start, and you're good to go. It supports tons of video formats and includes video resizing, and audio extraction. Electron is cross platform so Windows, Linux, and Mac are supported.
 
 ## Setup
 
@@ -33,5 +33,6 @@ N/A
 - [ ] Implement video resolution selection.
 - [ ] Implement redux, to manage state better.
 - [ ] Implement quality select.
+- [ ] Implement video preview.
 - [ ] Refactor css.
 - [ ] Add collapsible list for format categories.

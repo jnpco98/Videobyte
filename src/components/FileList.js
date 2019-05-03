@@ -31,14 +31,25 @@ const Item = styled.li.attrs({
     background: rgba(1, 22, 39, 1);
   }
   &&&.active{
-    background: rgba(23, 58, 66, 1);
+    background-color: rgba(0, 191, 165, 1);
+    :hover{
+      background-color: rgba(0, 191, 165, 1);
+    }
+  }
+  &&&:hover{
+    background-color: rgba(0, 191, 165, 0.8);
   }
 `;
 
 const RemoveFile = styled.i.attrs({
-  className: 'material-icons small circle grey'
+  className: 'material-icons small circle'
 })`
-  color:white
+  color:white;
+  background-color: rgba(0, 191, 165, 1);
+  &:hover{
+    cursor: pointer;
+    background-color:#d32f2f;
+  }
 `;
 
 const FileInfo = styled.div`

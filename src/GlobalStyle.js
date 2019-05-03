@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     color: rgba(102, 126, 146, 1);
   }
 
+  a { 
+    text-decoration: none;
+  }
+
   @font-face {
     font-family: segoe;
     src: url(${segoe});

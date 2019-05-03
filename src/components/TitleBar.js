@@ -63,6 +63,10 @@ const WindowsControl = styled.div`
   font-weight: 200;
   font-family: segoe;
   color:grey;
+
+  :hover{
+    background-color: rgba(122, 123, 124, 0.3);
+  }
 `;
 
 class TitleBar extends React.Component {

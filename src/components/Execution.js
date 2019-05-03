@@ -25,6 +25,10 @@ const SaveToDirectoryCheck = styled.input.attrs({ type: 'checkbox' })`
 
 const SaveToDirectoryLabel = styled.label`
   color: rgba(102,126,146,1);
+  
+  &&&:hover{
+    color: rgba(0, 191, 165, 1);
+  }
 `;
 
 const PathLabel = styled.label`
@@ -45,18 +49,31 @@ const Operation = styled.div`
 `;
 
 const Start = styled.a.attrs({
-  className: 'transparent btn-large waves-effect',
+  className: 'btn-large waves-effect',
 })`
-  border: 2px solid #1de9b6 !important;
-  border-radius: 5px !important;
+
+  &&& {
+    border: 2px solid #1de9b6;
+    border-radius: 5px;
+    background-color: transparent;
+    :hover{
+      background-color: rgba(29, 233, 182, 0.4);
+    }
+  }
 `;
 
 const Pause = styled.a.attrs({
-  className: 'transparent btn-large waves-effect'
+  className: 'btn-large waves-effect'
 })`
-  border: 2px solid #1de9b6 !important;
-  margin-right: 0.5rem !important;
-  border-radius: 5px !important;
+  &&& {
+    border: 2px solid #1de9b6 !important;
+    margin-right: 0.5rem !important;
+    border-radius: 5px !important;
+    background-color: transparent;
+    :hover{
+      background-color: rgba(29, 233, 182, 0.4);
+    }
+  }
 `;
 
 const Icon = styled.i.attrs({

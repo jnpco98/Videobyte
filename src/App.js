@@ -35,7 +35,8 @@ const InnerWrapper = styled.div.attrs({
   display: grid;
   width: 100%;
   height: 95vh;
-  padding: 1.2rem;  
+  padding: 1.2rem; 
+  padding-top: 2.3rem;
   grid-template-columns: repeat(10, auto);
   grid-template-rows: repeat(10, auto);
 `;
@@ -50,7 +51,7 @@ class App extends Component {
       files: [],
       selectedFile: {},
       selectedFormat: VideoFormat[INITIAL_FORMAT],
-      saveToCurrentDirectory: true,
+      saveToCurrentDirectory: false,
     }
   }
 

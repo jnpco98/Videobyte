@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Icon from '../assets/images/icon2.png';
 
 const { remote, ipcRenderer } = window.require('electron');
 
@@ -22,7 +23,8 @@ const AppName = styled.div`
   display: flex;
   justify-content:center;
   align-items: center;
-  flex-grow: 1;
+  flex-grow: 2;
+  font-size: 0.9rem;,
 `;
 
 const MenuButton = styled.a`
@@ -108,9 +110,9 @@ class TitleBar extends React.Component {
     return (
       <Wrapper>
         <MenuButtons>
-          <MenuButton onClick={(event) => this.menuClick(event)} />
+          <MenuButton onClick={(event) => this.menuClick(event)}><img src={Icon} width='100%' height='100%' /></MenuButton>
         </MenuButtons>
-        <AppName>FFVideo</AppName>
+        <AppName>FFVIDEO</AppName>
         <WindowsControls>
           <WindowsControl className={className} onClick={() => this.minimize()}>&#xE921;</WindowsControl>
           {

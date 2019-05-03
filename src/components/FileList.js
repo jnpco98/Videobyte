@@ -69,9 +69,14 @@ const Progress = styled.p`
 `;
 
 const Complete = styled.i.attrs({
-  className: 'material-icons small circle grey'
+  className: 'material-icons small circle'
 })`
-  color:white
+  color:white;
+  background-color: rgba(48, 51, 50, 0.4);
+  &:hover{
+    cursor: pointer;
+    background-color:#0288d1;
+  }
 `;
 
 const FileList = ({ files, removeFiles, selectedFile, setSelectedFile, openDirectory }) => {

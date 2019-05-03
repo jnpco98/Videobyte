@@ -10,7 +10,9 @@ git clone https://github.com/jnpco/FFVideo.git
 cd FFVideo
 ```
 ### Demo
-<img src="samples/screenshot.png" height="300" alt="demo">
+<img src="samples/nofiles.png" height="300" alt="nofiles">
+<img src="samples/withconverted.png" height="300" alt="withconverted">
+<img src="samples/withfiles.png" height="300" alt="withfiles">
 
 ## Usage
 
@@ -26,10 +28,10 @@ Just drag all your files and instantly convert all of them to the desired video/
 
 N/A
 
-- [ ] Implement convert queue.
-- [ ] Implement covert pause.
-- [ ] Implement convert stop.
+- [ ] Implement convert queue, stop and pause.
 - [ ] Implement other codec convertion.
 - [ ] Implement video resolution selection.
 - [ ] Implement redux, to manage state better.
+- [ ] Implement quality select.
 - [ ] Refactor css.
+- [ ] Add collapsible list for format categories.

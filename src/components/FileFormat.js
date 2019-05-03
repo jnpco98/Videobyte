@@ -1,6 +1,6 @@
 import React from 'react';
 
-import VideoFormat from '../VideoFormat';
+import { VideoFormat, AudioFormat } from '../MediaFormat';
 import SimpleBar from 'simplebar-react';
 import styled from 'styled-components';
 
@@ -67,6 +67,17 @@ class FileFormat extends React.Component {
                   <Format className={videoFormat.name === selectedFormat.name ? 'active' : ''} key={key} onClick={() => selectFormat(videoFormat)}>
                     <FormatName>{videoFormat.name}</FormatName>
                     <FormatDescription>{videoFormat.extension}</FormatDescription>
+                  </Format>
+                );
+              })
+            }
+            {
+              Object.keys(AudioFormat).map(key => {
+                const audioFormat = AudioFormat[key];
+                return (
+                  <Format className={audioFormat.name === selectedFormat.name ? 'active' : ''} key={key} onClick={() => selectFormat(audioFormat)}>
+                    <FormatName>{audioFormat.name}</FormatName>
+                    <FormatDescription>{audioFormat.extension}</FormatDescription>
                   </Format>
                 );
               })

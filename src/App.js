@@ -9,7 +9,7 @@ import FileDrop from './components/FileDrop';
 import FileFormat from './components/FileFormat';
 import Execution from './components/Execution';
 import Preview from './components/Preview';
-import VideoFormat from './VideoFormat';
+import { VideoFormat } from './MediaFormat';
 
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';

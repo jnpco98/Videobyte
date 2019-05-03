@@ -145,7 +145,7 @@ class App extends Component {
             setSelectedFile={this.setSelectedFile}
             openDirectory={this.openDirectory} />
           <Preview
-            selectedFile={selectedFile} />
+            selectedFile={files.length > 0 ? selectedFile : {}} />
           <FilenameModifier />
           <FileFormat
             selectFormat={this.selectFormat}

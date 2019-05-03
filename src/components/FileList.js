@@ -46,7 +46,7 @@ const RemoveFile = styled.i.attrs({
   className: 'material-icons small circle'
 })`
   color:white;
-  background-color: rgba(0, 191, 165, 1);
+  background-color: rgba(48, 51, 50, 0.4);
   &:hover{
     cursor: pointer;
     background-color:#d32f2f;

@@ -41,22 +41,24 @@ class Preview extends React.Component {
     let meta = selectedFile.meta;
 
     if (meta) {
-      const { bit_rate, duration, format_long_name, probe_score, size, tags } = meta.format;
-      return (
-        <Wrapper>
-          <FileInfo>
-            <p>Bit Rate: {bit_rate}</p>
-            <p>Duration: {duration}</p>
-            <p>Format: {format_long_name}</p>
-            <p>Probe Score: {probe_score}</p>
-            <p>Size: {size}</p>
-            <p>Creation: {tags.creation_time}</p>
-          </FileInfo>
-          <PreviewFile controls={true}>
-            <source src={this.state.previewVideo} type='video/mp4' />
-          </PreviewFile>
-        </Wrapper>
-      );
+      if(meta.format){
+        const { bit_rate, duration, format_long_name, probe_score, size, tags } = meta.format;
+        return (
+          <Wrapper>
+            <FileInfo>
+              <p>Bit Rate: {bit_rate}</p>
+              <p>Duration: {duration}</p>
+              <p>Format: {format_long_name}</p>
+              <p>Probe Score: {probe_score}</p>
+              <p>Size: {size}</p>
+              <p>Creation: {tags.creation_time}</p>
+            </FileInfo>
+            <PreviewFile controls={true}>
+              <source src={this.state.previewVideo} type='video/mp4' />
+            </PreviewFile>
+          </Wrapper>
+        );
+      }
     }
     else {
       return (

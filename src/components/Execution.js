@@ -11,7 +11,7 @@ const Wrapper = styled.div.attrs({
   display:flex;
   justify-content: space-between;
   align-items:center;
-  padding: 0 1rem;
+  padding: 0 2rem 2rem 2rem;
 `;
 
 const SaveDirectory = styled.div`
@@ -36,22 +36,28 @@ const PathName = styled.input`
 
 const Operation = styled.div`
   display:flex;
-  align-items:center;
   padding: 0 1rem;
 `;
 
-const Cancel = styled.a.attrs({
+const Start = styled.a.attrs({
   className: 'transparent btn-large waves-effect',
-})``;
+})`
+  border: 2px solid #1de9b6 !important;
+  border-radius: 5px !important;
+`;
 
 const Pause = styled.a.attrs({
   className: 'transparent btn-large waves-effect'
-})``;
+})`
+  border: 2px solid #1de9b6 !important;
+  margin-right: 0.5rem !important;
+  border-radius: 5px !important;
+`;
 
 const Icon = styled.i.attrs({
   className: 'material-icons'
 })`
-  color: rgba(102,126,146,1);
+  color: #1de9b6;
 `;
 
 const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory }) => {
@@ -68,8 +74,8 @@ const Execution = ({ convert, saveToCurrentDirectory, setSaveToCurrentDirectory 
         </div>
       </SaveDirectory>
       <Operation>
-        <Cancel><Icon>pause_circle_outline</Icon></Cancel>
-        <Pause onClick={() => convert()}><Icon>play_circle_outline</Icon></Pause>
+        <Pause><Icon>pause_circle_outline</Icon></Pause>
+        <Start onClick={() => convert()}><Icon>play_circle_outline</Icon></Start>
       </Operation>
     </Wrapper>
   );

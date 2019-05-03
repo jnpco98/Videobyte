@@ -9,14 +9,16 @@ const Wrapper = styled.div.attrs({
 })`
   min-width: 50vw;
   min-height: 30vh;
-  padding: 0 0.5rem 1rem 0.5rem;
-
+  padding: 0 2rem 1rem 2rem;
 `;
 
 const List = styled.ul.attrs({
   className: 'collection'
 })`
   height: 100%;
+  &&&{
+    border: 1px solid #1de9b6;
+  }
 `;
 
 const Item = styled.li.attrs({

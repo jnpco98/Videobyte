@@ -24,10 +24,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: segoe;
     src: url(${segoe});
   }
-
-  .selected{
-    background: rgba(3, 129, 138, 1);
-  }
   
   #file-list{
     grid-column: 1/6;

@@ -12,7 +12,8 @@ const Wrapper = styled.div.attrs({
   align-items:center;
 `;
 
-const EmptyPreview = styled.div``;
+const EmptyPreview = styled.div`
+`;
 
 const FileInfo = styled.div`
   width: 30%;
@@ -41,7 +42,7 @@ class Preview extends React.Component {
     let meta = selectedFile.meta;
 
     if (meta) {
-      if(meta.format){
+      if (meta.format) {
         const { bit_rate, duration, format_long_name, probe_score, size, tags } = meta.format;
         return (
           <Wrapper>

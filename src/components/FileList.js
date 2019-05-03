@@ -82,9 +82,9 @@ const FileList = ({ files, removeFiles, selectedFile, setSelectedFile, openDirec
             files.map(file => {
               const { id, name, meta, progress, complete, outputPath } = file;
               return (
-                <Item key={id} className={file.name === selectedFile.name ? 'active' : ''} onClick={() => setSelectedFile(file)}>
+                <Item key={id} className={file.name === selectedFile.name ? 'active' : ''}>
                   <RemoveFile onClick={() => removeFiles([id])}>clear</RemoveFile>
-                  <FileInfo>
+                  <FileInfo onClick={() => setSelectedFile(file)}>
                     <Filename>{name}</Filename>
                     <FileDuration>{meta ? meta.format.duration : 'Duration n/a'}</FileDuration>
                   </FileInfo>

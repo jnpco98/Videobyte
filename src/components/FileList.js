@@ -73,7 +73,7 @@ const FileList = ({ files, removeFiles, selectedFile, setSelectedFile, openDirec
                   <RemoveFile onClick={() => removeFiles([id])}>clear</RemoveFile>
                   <FileInfo>
                     <Filename>{name}</Filename>
-                    <FileDuration>{meta.format.duration}</FileDuration>
+                    <FileDuration>{meta ? meta.format.duration : 'Duration n/a'}</FileDuration>
                   </FileInfo>
                   {complete ? <Complete onClick={() => openDirectory(outputPath)}>folder</Complete> : <Progress>{progress + '%'}</Progress>}
                 </Item>

@@ -35,8 +35,7 @@ const InnerWrapper = styled.div.attrs({
   display: grid;
   width: 100%;
   height: 95vh;
-  padding: 1.2rem; 
-  padding-top: 2.3rem;
+  padding: 2.3rem;
   grid-template-columns: repeat(10, auto);
   grid-template-rows: repeat(10, auto);
 `;

@@ -12,7 +12,6 @@ cd FFVideo
 ### Demo
 <img src="samples/nofiles.png" height="300" alt="nofiles">
 <img src="samples/withconverted.png" height="300" alt="withconverted">
-<img src="samples/withfiles.png" height="300" alt="withfiles">
 
 ## Usage
 
